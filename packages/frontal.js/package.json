@@ -2,7 +2,7 @@
 	"name": "frontal.js",
 	"version": "0.1.19",
 	"description": "HTTP Development Framework",
-	"homepage": "https://github.com/relyio/frontal.js",
+	"homepage": "https://github.com/dlexio/frontal.js",
 	"license": "MIT",
 	"main": "src/frontal.js",
 	"bin": {
@@ -11,7 +11,7 @@
 	"repository": {
 		"directory": "packages/frontal.js",
 		"type": "git",
-		"url": "https://github.com/relyio/frontal.js.git"
+		"url": "https://github.com/dlexio/frontal.js.git"
 	},
 	"files": [
 		"src"

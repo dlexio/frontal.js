@@ -11,7 +11,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/relyio/frontal.js.git",
+		"url": "https://github.com/dlexio/frontal.js.git",
 		"directory": "@frontal/nextjs-plugin"
 	},
 	"dependencies": {

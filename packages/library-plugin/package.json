@@ -1,7 +1,7 @@
 {
 	"name": "@frontal/library-plugin",
 	"version": "0.1.9",
-	"homepage": "https://github.com/relyio/frontal.js",
+	"homepage": "https://github.com/dlexio/frontal.js",
 	"license": "MIT",
 	"main": "src/index.js",
 	"files": [
@@ -12,7 +12,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/relyio/frontal.js.git",
+		"url": "https://github.com/dlexio/frontal.js.git",
 		"directory": "packages/library-plugin"
 	},
 	"dependencies": {

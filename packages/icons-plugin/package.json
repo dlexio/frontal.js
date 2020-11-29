@@ -2,7 +2,7 @@
 	"name": "@frontal/icons-plugin",
 	"version": "0.1.1",
 	"description": "Replace <icon> tag within HTML templates with inline SVGs",
-	"homepage": "https://github.com/relyio/frontal.js",
+	"homepage": "https://github.com/dlexio/frontal.js",
 	"license": "MIT",
 	"main": "src/index.js",
 	"directories": {},
@@ -14,7 +14,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/relyio/frontal.js.git",
+		"url": "https://github.com/dlexio/frontal.js.git",
 		"directory": "packages/icons-plugin"
 	},
 	"dependencies": {
