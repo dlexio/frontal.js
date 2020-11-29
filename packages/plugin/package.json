@@ -1,0 +1,19 @@
+{
+	"name": "@frontal/plugin",
+	"version": "0.1.2",
+	"homepage": "https://github.com/relyio/frontal.js",
+	"license": "MIT",
+	"main": "src/index.js",
+	"files": [
+		"src"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/relyio/frontal.js.git",
+		"directory": "packages/plugin"
+	},
+	"scripts": {}
+}

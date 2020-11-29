@@ -1,0 +1,5 @@
+node_modules
+lerna.json
+packages/hmr-plugin/hot
+packages/hmr-plugin/client
+**/node_modules

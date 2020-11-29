@@ -1,0 +1,23 @@
+{
+	"name": "@frontal/files-plugin",
+	"version": "0.1.4",
+	"description": "Support loading Image, Fonts, SVGs and other files",
+	"license": "MIT",
+	"main": "src/index.js",
+	"files": [
+		"src"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/relyio/frontal.js.git",
+		"directory": "packages/files-plugin"
+	},
+	"dependencies": {
+		"@frontal/plugin": "^0.1.2",
+		"image-minimizer-webpack-plugin": "^1.0.0",
+		"image-webpack-loader": "^7.0.1"
+	}
+}

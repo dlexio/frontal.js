@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+const {Command} = require('commander');
+const {dev, build, serve, init} = require('./commands');
+
+// Initiate a new commander instance and parse options
+const program = new Command();
+program.version('0.1.0');
+
+/**
+ * `dlex init`
+ *
+ * the `init` command is an easy way to initiate a new application via a wizard that generates
+ * the application based on the answers given by the user.
+ */
+program.command('init [dir]')
+    .description('Initiate a new frontal application')
+    .action(init);
+
+/**
+ * `dlex dev`
+ *
+ * the `dev` command runs a new development server with the provided options with HMR + auto reloading enabled
+ */
+program.command('dev [dir]')
+    .description('Start application in development mode')
+    .option('-c, --config <config-path>', 'custom frontal.config.js location', 'frontal.config.js')
+    .option('-o, --open', 'Open server address in web browser', false)
+    .option('-h, --host <host>', 'development server host', undefined)
+    .option('-p, --port <port>', 'development server port', 3000)
+    .action(dev);
+
+/**
+ * `dlex build [dir]`
+ *
+ * Starts the final build process of an application which eventually generates a `dist` directory within the
+ * application that the user can easily serve with an HTTP server.
+ */
+program.command('build [dir]')
+    .description('Start building a production version of <app>')
+    .option('-c, --config <config-path>', 'custom frontal.config.js location', 'frontal.config.js')
+    .action(build);
+
+/**
+ * Starts a production express server serving the results of `$ frontal build` command
+ */
+program.command('serve [dir]')
+    .description('Start application in production mode')
+    .option('-c, --config <config-path>', 'custom frontal.config.js location', 'frontal.config.js')
+    .option('-h, --host <host>', 'development server host', undefined)
+    .option('-p, --port <port>', 'development server port', 3000)
+    .action(serve);
+
+
+program.parse(process.argv);

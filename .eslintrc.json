@@ -1,0 +1,29 @@
+{
+	"env": {
+		"commonjs": true,
+		"es2021": true,
+		"node": true
+	},
+	"extends": "eslint:recommended",
+	"parserOptions": {
+		"ecmaVersion": 12
+	},
+	"overrides": [
+		{
+			"files": ["packages/hmr-plugin/hot/*.js", "packages/hmr-plugin/client/**/*.js"],
+			"env": {
+				"es6": false,
+				"browser": true
+			},
+			"globals": {
+				"Promise": false,
+				"document": true,
+				"window": true
+			},
+			"parserOptions": {
+				"ecmaVersion": 5
+			}
+		}
+	],
+	"rules": {}
+}

@@ -1,0 +1,25 @@
+{
+	"name": "@frontal/lint-plugin",
+	"version": "0.1.4",
+	"description": "Provides eslint and stylelint support",
+	"license": "MIT",
+	"main": "src/index.js",
+	"files": [
+		"src"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/relyio/frontal.js.git",
+		"directory": "packages/lint-plugin"
+	},
+	"dependencies": {
+		"@frontal/plugin": "^0.1.2",
+		"eslint": "^7.14.0",
+		"eslint-webpack-plugin": "^2.4.0",
+		"stylelint": "^13.8.0",
+		"stylelint-webpack-plugin": "^2.1.1"
+	}
+}
