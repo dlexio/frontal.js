@@ -8,9 +8,9 @@
     "lint": "yarn prettier:check && eslint . --ext js",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "test:unit": "cross-env jest packages --forceExit",
-    "test:fixtures": "cross-env jest test/fixtures --forceExit",
-    "test:e2e": "cross-env jest test/e2e --forceExit"
+    "test:unit": "jest packages --forceExit",
+    "test:fixtures": "jest test/fixtures --forceExit",
+    "test:e2e": "jest test/e2e --forceExit"
   },
   "devDependencies": {
     "cross-env": "7.0.2",
