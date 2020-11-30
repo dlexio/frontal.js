@@ -1,4 +1,4 @@
-<p align="center"><img align="center" src="https://dlex.io/frontal/assets/github_banner.png"/></p><br/>
+[![Frontal.js](https://dlex.io/frontal/assets/github_banner.png)](https://dlex.io/frontal)
 
 <p align="center">
   <a aria-label="Build Status" href="https://github.com/dlexio/frontal.js/actions?query=branch%3Amain">
