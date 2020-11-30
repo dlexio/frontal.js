@@ -1,23 +1,23 @@
 {
-	"name": "@frontal/library-plugin",
-	"version": "0.1.9",
-	"homepage": "https://github.com/dlexio/frontal.js",
-	"license": "MIT",
-	"main": "src/index.js",
-	"files": [
-		"src"
-	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dlexio/frontal.js.git",
-		"directory": "packages/library-plugin"
-	},
-	"dependencies": {
-		"@frontal/plugin": "^0.1.2",
-		"glob": "^7.1.6",
-		"is": "^3.3.0"
-	}
+  "name": "@frontal/library-plugin",
+  "version": "0.1.9",
+  "homepage": "https://github.com/dlexio/frontal.js",
+  "license": "MIT",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dlexio/frontal.js.git",
+    "directory": "packages/library-plugin"
+  },
+  "dependencies": {
+    "@frontal/plugin": "^0.1.2",
+    "glob": "^7.1.6",
+    "is": "^3.3.0"
+  }
 }

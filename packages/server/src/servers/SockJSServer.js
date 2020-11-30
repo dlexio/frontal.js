@@ -11,60 +11,64 @@ const BaseServer = require('./BaseServer')
 // sockjs will remove Origin header, however Origin header is required for checking host.
 // See https://github.com/webpack/webpack-dev-server/issues/1604 for more information
 {
-	const SockjsSession = require('sockjs/lib/transport').Session
-	const decorateConnection = SockjsSession.prototype.decorateConnection
-	SockjsSession.prototype.decorateConnection = function (req) {
-		decorateConnection.call(this, req)
-		const connection = this.connection
-		if (connection.headers && !('origin' in connection.headers) && 'origin' in req.headers) {
-			connection.headers.origin = req.headers.origin
-		}
-	}
+  const SockjsSession = require('sockjs/lib/transport').Session
+  const decorateConnection = SockjsSession.prototype.decorateConnection
+  SockjsSession.prototype.decorateConnection = function (req) {
+    decorateConnection.call(this, req)
+    const connection = this.connection
+    if (
+      connection.headers &&
+      !('origin' in connection.headers) &&
+      'origin' in req.headers
+    ) {
+      connection.headers.origin = req.headers.origin
+    }
+  }
 }
 
 module.exports = class SockJSServer extends BaseServer {
-	// options has: error (function), debug (function), server (http/s server), path (string)
-	constructor(server) {
-		super(server)
-		this.socket = sockjs.createServer({
-			// Use provided up-to-date sockjs-client
-			sockjs_url: '/__webpack_dev_server__/sockjs.bundle.js',
-			// Limit useless logs
-			log: (severity, line) => {
-				if (severity === 'error') {
-					this.frontalServer.logger.error(line)
-				} else {
-					this.frontalServer.logger.debug(line)
-				}
-			},
-		})
+  // options has: error (function), debug (function), server (http/s server), path (string)
+  constructor(server) {
+    super(server)
+    this.socket = sockjs.createServer({
+      // Use provided up-to-date sockjs-client
+      sockjs_url: '/__webpack_dev_server__/sockjs.bundle.js',
+      // Limit useless logs
+      log: (severity, line) => {
+        if (severity === 'error') {
+          this.frontalServer.logger.error(line)
+        } else {
+          this.frontalServer.logger.debug(line)
+        }
+      },
+    })
 
-		this.socket.installHandlers(this.frontalServer.httpServer, {
-			prefix: this.frontalServer.sockPath,
-		})
-	}
+    this.socket.installHandlers(this.frontalServer.httpServer, {
+      prefix: this.frontalServer.sockPath,
+    })
+  }
 
-	send(connection, message) {
-		// prevent cases where the server is trying to send data while connection is closing
-		if (connection.readyState !== 1) {
-			return
-		}
+  send(connection, message) {
+    // prevent cases where the server is trying to send data while connection is closing
+    if (connection.readyState !== 1) {
+      return
+    }
 
-		connection.write(message)
-	}
+    connection.write(message)
+  }
 
-	close(connection) {
-		connection.close()
-	}
+  close(connection) {
+    connection.close()
+  }
 
-	// f should be passed the resulting connection and the connection headers
-	onConnection(f) {
-		this.socket.on('connection', (connection) => {
-			f(connection, connection ? connection.headers : null)
-		})
-	}
+  // f should be passed the resulting connection and the connection headers
+  onConnection(f) {
+    this.socket.on('connection', (connection) => {
+      f(connection, connection ? connection.headers : null)
+    })
+  }
 
-	onConnectionClose(connection, f) {
-		connection.on('close', f)
-	}
+  onConnectionClose(connection, f) {
+    connection.on('close', f)
+  }
 }

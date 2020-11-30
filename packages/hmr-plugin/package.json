@@ -1,25 +1,25 @@
 {
-	"name": "@frontal/hmr-plugin",
-	"version": "0.1.7",
-	"homepage": "https://github.com/dlexio/frontal.js",
-	"license": "MIT",
-	"main": "src/index.js",
-	"directories": {},
-	"files": [
-		"src"
-	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dlexio/frontal.js.git",
-		"directory": "packages/hmr-plugin"
-	},
-	"dependencies": {
-		"@frontal/plugin": "^0.1.2",
-		"loglevel": "^1.7.0",
-		"sockjs-client": "^1.5.0",
-		"url": "^0.11.0"
-	}
+  "name": "@frontal/hmr-plugin",
+  "version": "0.1.7",
+  "homepage": "https://github.com/dlexio/frontal.js",
+  "license": "MIT",
+  "main": "src/index.js",
+  "directories": {},
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dlexio/frontal.js.git",
+    "directory": "packages/hmr-plugin"
+  },
+  "dependencies": {
+    "@frontal/plugin": "^0.1.2",
+    "loglevel": "^1.7.0",
+    "sockjs-client": "^1.5.0",
+    "url": "^0.11.0"
+  }
 }

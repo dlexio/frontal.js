@@ -1,3 +1,4 @@
-/packages/hmr-plugin/client/clients
+/packages/hmr-plugin/src/client/clients
+examples/**
 **/node_modules
 node_modules

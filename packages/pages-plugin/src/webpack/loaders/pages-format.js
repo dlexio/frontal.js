@@ -9,27 +9,27 @@ const minify = require('html-minifier-terser').minify
  * @returns {string}
  */
 module.exports = function (source) {
-	const options = getOptions(this)
-	const frontalApp = options.app
-	const formatMode = frontalApp.config.get('pages.html.format', false)
+  const options = getOptions(this)
+  const frontalApp = options.app
+  const formatMode = frontalApp.config.get('pages.html.format', false)
 
-	// Handle beautify mode
-	if (formatMode === 'beautify') {
-		return html_beautify(source)
-	}
+  // Handle beautify mode
+  if (formatMode === 'beautify') {
+    return html_beautify(source)
+  }
 
-	// Handle minify mode
-	if (formatMode === 'minify') {
-		return minify(source, {
-			collapseWhitespace: true,
-			keepClosingSlash: true,
-			removeComments: true,
-			removeRedundantAttributes: true,
-			removeScriptTypeAttributes: true,
-			removeStyleLinkTypeAttributes: true,
-			useShortDoctype: true,
-		})
-	}
+  // Handle minify mode
+  if (formatMode === 'minify') {
+    return minify(source, {
+      collapseWhitespace: true,
+      keepClosingSlash: true,
+      removeComments: true,
+      removeRedundantAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      useShortDoctype: true,
+    })
+  }
 
-	return source
+  return source
 }

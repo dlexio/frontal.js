@@ -1,40 +1,40 @@
 {
-	"type": "object",
-	"properties": {
-		"server": {
-			"type": "object",
-			"properties": {
-				"host": {
-					"type": "string"
-				},
-				"port": {
-					"type": "number"
-				},
-				"public": {
-					"type": "string"
-				},
-				"base": {
-					"type": "string"
-				}
-			}
-		},
-		"pages": {
-			"type": "object",
-			"properties": {
-				"path": {
-					"type": "string"
-				},
-				"pattern": {
-					"type": "array"
-				}
-			}
-		},
-		"library": {
-			"type": "object"
-		},
-		"bundles": {
-			"type": "object"
-		}
-	},
-	"additionalProperties": true
+  "type": "object",
+  "properties": {
+    "server": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "number"
+        },
+        "public": {
+          "type": "string"
+        },
+        "base": {
+          "type": "string"
+        }
+      }
+    },
+    "pages": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "array"
+        }
+      }
+    },
+    "library": {
+      "type": "object"
+    },
+    "bundles": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
 }

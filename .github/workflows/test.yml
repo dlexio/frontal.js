@@ -2,21 +2,30 @@ name: test
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    types: [ opened, synchronize ]
+    types: [opened, synchronize]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    env:
-      NEXT_TELEMETRY_DISABLED: 1
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        #node: [10.x, 12.x, 14.x]
+        node: [10.x]
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-      - run: yarn install --frozen-lockfile --check-files
-      - uses: actions/cache@v2
-        id: cache-build
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          path: ./*
-          key: ${{ github.sha }}
+          node-version: ${{ matrix.node-version }}
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          path: './'
+          fetch-depth: 0
+      - run: yarn install --frozen-lockfile --check-files --non-interactive
+      - run: yarn lint
+      - run: yarn test:unit
+      - run: yarn test:fixtures --passWithNoTests
+      - run: yarn test:e2e --passWithNoTests

@@ -10,31 +10,31 @@ const include = require('posthtml-include')
  * @returns {string}
  */
 module.exports = function (source) {
-	const ctx = this,
-		callback = ctx.async(),
-		options = getOptions(ctx)
+  const ctx = this,
+    callback = ctx.async(),
+    options = getOptions(ctx)
 
-	const posthtmlPlugins = [
-		include({
-			encoding: 'utf8',
-			root: path.join(options.partialsDir, '/'),
-		}),
-	]
+  const posthtmlPlugins = [
+    include({
+      encoding: 'utf8',
+      root: path.join(options.partialsDir, '/'),
+    }),
+  ]
 
-	posthtml(posthtmlPlugins)
-		.process(source)
-		.then((result) => {
-			// Check messages of type dependency to add them to webpack as a dependency
-			result.messages
-				.filter((m) => m.type === 'dependency')
-				.forEach((msg) => {
-					ctx.addDependency(msg.file)
-				})
+  posthtml(posthtmlPlugins)
+    .process(source)
+    .then((result) => {
+      // Check messages of type dependency to add them to webpack as a dependency
+      result.messages
+        .filter((m) => m.type === 'dependency')
+        .forEach((msg) => {
+          ctx.addDependency(msg.file)
+        })
 
-			callback(null, result.html)
-		})
-		.catch((e) => {
-			// console.error('err', e);
-			callback(e)
-		})
+      callback(null, result.html)
+    })
+    .catch((e) => {
+      // console.error('err', e);
+      callback(e)
+    })
 }

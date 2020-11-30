@@ -1,3 +1,3 @@
 module.exports = {
-	clearConsole: require('./clearConsole'),
+  clearConsole: require('./clearConsole'),
 }
