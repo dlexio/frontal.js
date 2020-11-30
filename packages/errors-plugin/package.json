@@ -1,23 +1,23 @@
 {
-	"name": "@frontal/errors-plugin",
-	"version": "0.1.7",
-	"homepage": "https://github.com/dlexio/frontal.js",
-	"license": "MIT",
-	"main": "src/index.js",
-	"files": [
-		"src"
-	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dlexio/frontal.js.git",
-		"directory": "packages/errors-plugin"
-	},
-	"dependencies": {
-		"@frontal/plugin": "^0.1.2",
-		"friendly-errors-webpack-plugin": "^1.7.0",
-		"webpack": "^5.6.0"
-	}
+  "name": "@frontal/errors-plugin",
+  "version": "0.1.7",
+  "homepage": "https://github.com/dlexio/frontal.js",
+  "license": "MIT",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dlexio/frontal.js.git",
+    "directory": "packages/errors-plugin"
+  },
+  "dependencies": {
+    "@frontal/plugin": "^0.1.2",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "webpack": "^5.6.0"
+  }
 }

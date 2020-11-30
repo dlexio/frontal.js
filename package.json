@@ -1,25 +1,25 @@
 {
-	"name": "frontal.js",
-	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
-	"scripts": {
-		"lint": "eslint . --ext js",
-		"prettier-check": "prettier --check .",
-		"prettier-fix": "prettier --write .",
-		"test:unit": "cross-env jest packages --forceExit",
-		"test:fixtures": "cross-env jest test/fixtures --forceExit",
-		"test:e2e": "cross-env jest test/e2e --forceExit"
-	},
-	"devDependencies": {
-		"cross-env": "7.0.2",
-		"eslint": "^7.14.0",
-		"jest": "26.6.3",
-		"lerna": "^3.22.1",
-		"prettier": "2.2.1"
-	},
-	"engines": {
-		"node": ">= 10.13.0"
-	}
+  "name": "frontal.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "yarn prettier:check && eslint . --ext js",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "test:unit": "cross-env jest packages --forceExit",
+    "test:fixtures": "cross-env jest test/fixtures --forceExit",
+    "test:e2e": "cross-env jest test/e2e --forceExit"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.2",
+    "eslint": "^7.14.0",
+    "jest": "26.6.3",
+    "lerna": "^3.22.1",
+    "prettier": "2.2.1"
+  },
+  "engines": {
+    "node": ">= 10.13.0"
+  }
 }

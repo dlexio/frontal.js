@@ -1,36 +1,36 @@
 {
-	"name": "@frontal/config",
-	"version": "0.1.15",
-	"description": "Frontal's application's configuration parser",
-	"homepage": "https://github.com/dlexio/frontal.js",
-	"license": "MIT",
-	"main": "src/config.js",
-	"files": [
-		"src"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dlexio/frontal.js.git",
-		"directory": "packages/config"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"dependencies": {
-		"@frontal/errors-plugin": "^0.1.7",
-		"@frontal/files-plugin": "^0.1.4",
-		"@frontal/hmr-plugin": "^0.1.7",
-		"@frontal/icons-plugin": "^0.1.1",
-		"@frontal/library-plugin": "^0.1.9",
-		"@frontal/lint-plugin": "^0.1.4",
-		"@frontal/nextjs-plugin": "^0.1.7",
-		"@frontal/pages-plugin": "^0.1.10",
-		"@frontal/style-plugin": "^0.1.7",
-		"chokidar": "^3.4.3",
-		"consola": "^2.15.0",
-		"is": "^3.3.0",
-		"lodash": "^4.17.20",
-		"require-like": "^0.1.2",
-		"schema-utils": "^3.0.0"
-	}
+  "name": "@frontal/config",
+  "version": "0.1.15",
+  "description": "Frontal's application's configuration parser",
+  "homepage": "https://github.com/dlexio/frontal.js",
+  "license": "MIT",
+  "main": "src/config.js",
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dlexio/frontal.js.git",
+    "directory": "packages/config"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@frontal/errors-plugin": "^0.1.7",
+    "@frontal/files-plugin": "^0.1.4",
+    "@frontal/hmr-plugin": "^0.1.7",
+    "@frontal/icons-plugin": "^0.1.1",
+    "@frontal/library-plugin": "^0.1.9",
+    "@frontal/lint-plugin": "^0.1.4",
+    "@frontal/nextjs-plugin": "^0.1.7",
+    "@frontal/pages-plugin": "^0.1.10",
+    "@frontal/style-plugin": "^0.1.7",
+    "chokidar": "^3.4.3",
+    "consola": "^2.15.0",
+    "is": "^3.3.0",
+    "lodash": "^4.17.20",
+    "require-like": "^0.1.2",
+    "schema-utils": "^3.0.0"
+  }
 }

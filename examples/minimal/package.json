@@ -1,11 +1,11 @@
 {
-	"name": "frontal-minimal-example",
-	"scripts": {
-		"dev": "frontal dev",
-		"build": "frontal build",
-		"serve": "frontal serve"
-	},
-	"devDependencies": {
-		"frontal.js": "latest"
-	}
+  "name": "frontal-minimal-example",
+  "scripts": {
+    "dev": "frontal dev",
+    "build": "frontal build",
+    "serve": "frontal serve"
+  },
+  "devDependencies": {
+    "frontal.js": "latest"
+  }
 }
