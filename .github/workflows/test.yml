@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v2
         id: cache-build
         with:
-          path: ./*
+          path: ${{ github.workspace }}
           key: ${{ github.sha }}
 
   lint:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/cache@v2
         id: restore-build
         with:
-          path: ./*
+          path: ${{ github.workspace }}
           key: ${{ github.sha }}
       - run: yarn lint
     needs: [build]
@@ -41,10 +41,15 @@ jobs:
   test-unit:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: checkout
+        uses: actions/checkout@master
       - uses: actions/cache@v2
         id: restore-build
         with:
-          path: ./*
+          path: ${{ github.workspace }}
           key: ${{ github.sha }}
       - run: yarn test:unit
     needs: [build]
@@ -55,7 +60,7 @@ jobs:
       - uses: actions/cache@v2
         id: restore-build
         with:
-          path: ./*
+          path: ${{ github.workspace }}
           key: ${{ github.sha }}
       - run: yarn test:fixtures --passWithNoTests
     needs: [build]
@@ -66,7 +71,7 @@ jobs:
       - uses: actions/cache@v2
         id: restore-build
         with:
-          path: ./*
+          path: ${{ github.workspace }}
           key: ${{ github.sha }}
       - run: yarn test:e2e --passWithNoTests
     needs: [build]
