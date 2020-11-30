@@ -15,6 +15,7 @@
 ## Overview
 
 A modern HTML development framework packed with the most critical and commonly used features in today's modern workflows:
+
 - CSS Languages such as `Sass` and `Less`
 - Next generation JavaScript via `Babel`
 - PostCSS Support
@@ -41,4 +42,3 @@ View the full documentation at [https://dlex.io/frontal/docs](https://dlex.io/fr
 ## Contribution
 
 Read the [contributing.md](/contributing.md) guide.
-
