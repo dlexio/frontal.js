@@ -30,7 +30,6 @@
     "consola": "^2.15.0",
     "is": "^3.3.0",
     "lodash": "^4.17.20",
-    "require-like": "^0.1.2",
     "schema-utils": "^3.0.0"
   }
 }

@@ -26,15 +26,9 @@ module.exports = class PagesWebpackPlugin {
      * webpack's config entry field is empty and therefore no factories
      * are registered
      */
-    compiler.hooks.compilation.tap(
-      id,
-      (compilation, { normalModuleFactory }) => {
-        compilation.dependencyFactories.set(
-          EntryDependency,
-          normalModuleFactory
-        )
-      }
-    )
+    compiler.hooks.compilation.tap(id, (compilation, { normalModuleFactory }) => {
+      compilation.dependencyFactories.set(EntryDependency, normalModuleFactory)
+    })
 
     /**
      * Return an array of bundle names that belongs to the given `pageName`
@@ -71,11 +65,7 @@ module.exports = class PagesWebpackPlugin {
         const configBundles = this.app.config.get('computed_bundles')
 
         // Get pages
-        const pagesGlob = path.join(
-          this.dir,
-          '**',
-          `*.*(${this.opts.extensions.join('|')})`
-        )
+        const pagesGlob = path.join(this.dir, '**', `*.*(${this.opts.extensions.join('|')})`)
         const pages = glob.sync(pagesGlob).map((page) => {
           const pageName = page.replace(`${this.dir + path.sep}`, '')
           return {
@@ -135,10 +125,7 @@ module.exports = class PagesWebpackPlugin {
      * @param compilation
      * @returns {function({pages: *, bundles: *}): Promise<unknown[]>}
      */
-    const addPagesAsAssets = (compiler, compilation) => ({
-      pages,
-      bundles,
-    }) => {
+    const addPagesAsAssets = (compiler, compilation) => ({ pages, bundles }) => {
       const promises = []
 
       const reducer = function (flattened, other) {
@@ -148,15 +135,9 @@ module.exports = class PagesWebpackPlugin {
       for (const page of pages) {
         const imports = [page.path]
 
-        const entryOptions = EntryOptionPlugin.entryDescriptionToOptions(
-          compiler,
-          page.name,
-          { import: imports }
-        )
+        const entryOptions = EntryOptionPlugin.entryDescriptionToOptions(compiler, page.name, { import: imports })
         // @todo the way bundles are being determined and flattened can be improved!
-        const pageBundles = page.bundles.map(
-          (bundleName) => bundles[bundleName]
-        )
+        const pageBundles = page.bundles.map((bundleName) => bundles[bundleName])
         const frontalPageSettings = {
           js: _.uniq(
             _.reduce(
@@ -180,9 +161,7 @@ module.exports = class PagesWebpackPlugin {
             compilation.addEntry(
               compiler.context,
               EntryPlugin.createDependency(
-                `${page.path}?frontal_pages_bundles=${JSON.stringify(
-                  frontalPageSettings
-                )}`,
+                `${page.path}?frontal_pages_bundles=${JSON.stringify(frontalPageSettings)}`,
                 entryOptions
               ),
               entryOptions,
@@ -241,9 +220,7 @@ module.exports = class PagesWebpackPlugin {
       compilation.hooks.processAssets.tapAsync(id, (assets, callback) => {
         traversePages().then((pages) => {
           pages.forEach((page) => {
-            const pageAssetMatch = pm(
-              `assets${path.sep}js${path.sep + page.name}.*.js`
-            )
+            const pageAssetMatch = pm(`assets${path.sep}js${path.sep + page.name}.*.js`)
 
             Object.keys(assets).forEach((assetName) => {
               if (pageAssetMatch(assetName)) {

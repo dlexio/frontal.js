@@ -8,22 +8,16 @@ module.exports = (frontalApp) => {
     output: {
       path: path.join(frontalApp.cwd(), frontalApp.config.get('build.path')),
       filename: () => {
-        return 'assets/js/[name].[fullhash].js'
+        return 'assets/js/[name].[contenthash].js'
       },
     },
     plugins: [
+      new CleanWebpackPlugin(),
       new CopyPlugin({
         patterns: [
           {
-            from: path.join(
-              frontalApp.cwd(),
-              frontalApp.context(),
-              frontalApp.config.get('server.public')
-            ),
-            to: path.join(
-              frontalApp.cwd(),
-              frontalApp.config.get('build.path')
-            ),
+            from: path.join(frontalApp.cwd(), frontalApp.context(), frontalApp.config.get('server.public')),
+            to: path.join(frontalApp.cwd(), frontalApp.config.get('build.path')),
             noErrorOnMissing: true,
           },
         ],
@@ -31,7 +25,6 @@ module.exports = (frontalApp) => {
           concurrency: 100,
         },
       }),
-      new CleanWebpackPlugin(),
     ],
   }
 }

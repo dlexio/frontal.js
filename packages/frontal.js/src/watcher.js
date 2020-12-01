@@ -12,8 +12,7 @@ module.exports = class Watcher {
       return
     }
 
-    const optsObj =
-      is.object(opts) && is.function(cb) ? opts : { ignoreInitial: true }
+    const optsObj = is.object(opts) && is.function(cb) ? opts : { ignoreInitial: true }
     const _cb = is.object(opts) && is.function(cb) ? cb : opts
 
     // Initiate a new watcher

@@ -8,7 +8,7 @@ const program = new Command();
 program.version('0.1.0');
 
 /**
- * `dlex init`
+ * `frontal init`
  *
  * the `init` command is an easy way to initiate a new application via a wizard that generates
  * the application based on the answers given by the user.
@@ -18,7 +18,7 @@ program.command('init [dir]')
     .action(init);
 
 /**
- * `dlex dev`
+ * `frontal dev`
  *
  * the `dev` command runs a new development server with the provided options with HMR + auto reloading enabled
  */
@@ -31,7 +31,7 @@ program.command('dev [dir]')
     .action(dev);
 
 /**
- * `dlex build [dir]`
+ * `frontal build [dir]`
  *
  * Starts the final build process of an application which eventually generates a `dist` directory within the
  * application that the user can easily serve with an HTTP server.

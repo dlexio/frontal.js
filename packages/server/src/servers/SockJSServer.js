@@ -16,11 +16,7 @@ const BaseServer = require('./BaseServer')
   SockjsSession.prototype.decorateConnection = function (req) {
     decorateConnection.call(this, req)
     const connection = this.connection
-    if (
-      connection.headers &&
-      !('origin' in connection.headers) &&
-      'origin' in req.headers
-    ) {
+    if (connection.headers && !('origin' in connection.headers) && 'origin' in req.headers) {
       connection.headers.origin = req.headers.origin
     }
   }

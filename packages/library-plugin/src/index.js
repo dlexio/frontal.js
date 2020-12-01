@@ -64,13 +64,8 @@ module.exports = class LibraryPlugin extends fPlugin {
       for (let styleImport of lib.style.imports) {
         // Apply globals to the style import based on file extension
         const importExt = path.extname(styleImport.path).replace('.', '')
-        if (
-          is.array(this.globalStlyes[importExt]) &&
-          this.globalStlyes[importExt].length > 0
-        ) {
-          styleImport.path = `${styleImport.path}?globals=${this.globalStlyes[
-            importExt
-          ].join(',')}`
+        if (is.array(this.globalStlyes[importExt]) && this.globalStlyes[importExt].length > 0) {
+          styleImport.path = `${styleImport.path}?globals=${this.globalStlyes[importExt].join(',')}`
         }
 
         // Append style import to bundle's assets
@@ -155,11 +150,7 @@ module.exports = class LibraryPlugin extends fPlugin {
       options: this.app.config.get('library.options', {}),
     }
     this.libOpts = {
-      dir: path.join(
-        this.app.cwd(),
-        this.app.context(),
-        path.dirname(opts.location)
-      ),
+      dir: path.join(this.app.cwd(), this.app.context(), path.dirname(opts.location)),
     }
 
     // 1) resolve the library entry file
@@ -180,10 +171,7 @@ module.exports = class LibraryPlugin extends fPlugin {
         delete require.cache[libEntryPath]
         this.app.invalidate(() => {
           if (eventType === 'change') {
-            this.app.devServer.socketServer.write(
-              this.app.devServer.socketServer.sockets,
-              'content-changed'
-            )
+            this.app.devServer.socketServer.write(this.app.devServer.socketServer.sockets, 'content-changed')
           }
         })
       })
@@ -218,8 +206,7 @@ module.exports = class LibraryPlugin extends fPlugin {
     }
 
     // Get target bundle for library's primary imports
-    const targetBundle =
-      bundles[opts.bundle] !== undefined ? opts.bundle : Object.keys(bundles)[0]
+    const targetBundle = bundles[opts.bundle] !== undefined ? opts.bundle : Object.keys(bundles)[0]
 
     // Assign an empty object to final bundles modifications
     const fBundles = {}
@@ -236,12 +223,7 @@ module.exports = class LibraryPlugin extends fPlugin {
         // Handle components if defined as an array of components names
         if (is.array(desc.components) && desc.components.length > 0) {
           for (const componentName of desc.components) {
-            this.addComToBundle(
-              name,
-              fBundles,
-              lib.components.get(componentName),
-              {}
-            )
+            this.addComToBundle(name, fBundles, lib.components.get(componentName), {})
           }
         }
 
@@ -259,12 +241,7 @@ module.exports = class LibraryPlugin extends fPlugin {
             const comOpts = is.object(comDesc) ? comDesc : {}
 
             // Add component to final bundles
-            this.addComToBundle(
-              name,
-              fBundles,
-              lib.components.get(componentName),
-              comOpts
-            )
+            this.addComToBundle(name, fBundles, lib.components.get(componentName), comOpts)
           }
         }
       }

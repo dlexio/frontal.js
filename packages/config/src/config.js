@@ -1,11 +1,9 @@
 const path = require('path')
 const fs = require('fs')
-const vm = require('vm')
 const is = require('is')
 const _ = require('lodash')
 const chokidar = require('chokidar')
 const consola = require('consola')
-const requireLike = require('require-like')
 
 const defaultConfig = require('./defaults')
 const schema = require('./schema.json')
@@ -39,11 +37,7 @@ module.exports = class Config {
       // Apply custom configuration to this Config instance
       this.applyCustomConfig()
     } catch (e) {
-      this.logger.error(
-        `\`${path.basename(
-          this.path
-        )}\` used for configuration is invalid due to: \n\n${e.message}`
-      )
+      this.logger.error(`\`${path.basename(this.path)}\` used for configuration is invalid due to: \n\n${e.message}`)
     }
   }
 
@@ -110,52 +104,44 @@ module.exports = class Config {
    */
   onChange(cb) {
     // keep a copy of the current configuration
-    chokidar
-      .watch(this.path, { ignoreInitial: true })
-      .on('all', (event, filePath) => {
-        const bk = Object.assign({}, this.data)
+    chokidar.watch(this.path, { ignoreInitial: true }).on('all', (event, filePath) => {
+      const bk = Object.assign({}, this.data)
 
-        // Reset config to the defaults
-        this.applyDefaults(this.defaults)
+      // Reset config to the defaults
+      this.applyDefaults(this.defaults)
 
-        // Handle each event type of the configuration
-        switch (event) {
-          case 'add':
-          case 'change':
-            try {
-              // Apply custom configuration to this Config instance
-              this.applyCustomConfig()
+      // Handle each event type of the configuration
+      switch (event) {
+        case 'add':
+        case 'change':
+          try {
+            // Apply custom configuration to this Config instance
+            this.applyCustomConfig()
 
-              // Notify that the custom config file is in use
-              if (event === 'add') {
-                this.logger.info(
-                  `\`${path.basename(filePath)}\` is used for configuration.`
-                )
-              }
-            } catch (e) {
-              this.logger.error(
-                `\`${path.basename(
-                  filePath
-                )}\` used for configuration is invalid due to: \n\n${e.message}`
-              )
+            // Notify that the custom config file is in use
+            if (event === 'add') {
+              this.logger.info(`\`${path.basename(filePath)}\` is used for configuration.`)
             }
-            break
-          case 'unlink':
-            this.logger.info(
-              `\`${path.basename(
-                filePath
-              )}\` configuration file not found, falling back to default configuration.`
+          } catch (e) {
+            this.logger.error(
+              `\`${path.basename(filePath)}\` used for configuration is invalid due to: \n\n${e.message}`
             )
-            break
-        }
+          }
+          break
+        case 'unlink':
+          this.logger.info(
+            `\`${path.basename(filePath)}\` configuration file not found, falling back to default configuration.`
+          )
+          break
+      }
 
-        // Pass a before and after copies of the config in case
-        // there was a change to the config.
-        const configCopy = Object.assign({}, this.data)
-        if (!_.isEqual(bk, configCopy)) {
-          cb(bk, configCopy, this.difference(configCopy, bk))
-        }
-      })
+      // Pass a before and after copies of the config in case
+      // there was a change to the config.
+      const configCopy = Object.assign({}, this.data)
+      if (!_.isEqual(bk, configCopy)) {
+        cb(bk, configCopy, this.difference(configCopy, bk))
+      }
+    })
   }
 
   /**
@@ -170,10 +156,7 @@ module.exports = class Config {
     function changes(object, base) {
       return _.transform(object, function (result, value, key) {
         if (!_.isEqual(value, base[key])) {
-          result[key] =
-            _.isObject(value) && _.isObject(base[key])
-              ? changes(value, base[key])
-              : value
+          result[key] = _.isObject(value) && _.isObject(base[key]) ? changes(value, base[key]) : value
         }
       })
     }
@@ -187,18 +170,14 @@ module.exports = class Config {
    * @returns {Error|*}
    */
   getFileConfig() {
-    const cwdRequire = requireLike(path.join(this.cwd, '/'))
-    const configFile = fs.readFileSync(this.path)
-    const sandbox = { require: cwdRequire, module: { exports: undefined } }
-    const context = new vm.createContext(sandbox)
-    const config = new vm.Script(configFile.toString())
-    config.runInContext(context)
+    // empty out cache
+    delete require.cache[this.path]
+
+    // load file
+    const config = require(this.path)
 
     // Fail if the executed code does not result in exporting a function or an object to module.exports
-    if (
-      !is.function(sandbox.module.exports) &&
-      !is.object(sandbox.module.exports)
-    ) {
+    if (!is.function(config) && !is.object(config)) {
       throw new Error(
         "The application's config should either export an object or a function that returns an object.\n\n" +
           'Object example:\n' +
@@ -215,8 +194,6 @@ module.exports = class Config {
       )
     }
 
-    return is.function(sandbox.module.exports)
-      ? sandbox.module.exports()
-      : sandbox.module.exports
+    return is.function(config) ? config(process.env.NODE_ENV) : config
   }
 }

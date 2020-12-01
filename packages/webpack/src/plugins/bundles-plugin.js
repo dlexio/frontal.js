@@ -19,15 +19,9 @@ module.exports = class FrontalBundlesPlugin {
      * webpack's config entry field is empty and therefore no factories
      * are registered
      */
-    compiler.hooks.compilation.tap(
-      id,
-      (compilation, { normalModuleFactory }) => {
-        compilation.dependencyFactories.set(
-          EntryDependency,
-          normalModuleFactory
-        )
-      }
-    )
+    compiler.hooks.compilation.tap(id, (compilation, { normalModuleFactory }) => {
+      compilation.dependencyFactories.set(EntryDependency, normalModuleFactory)
+    })
 
     /**
      * Get bundles from current Frontal app's config as well as
@@ -65,11 +59,7 @@ module.exports = class FrontalBundlesPlugin {
             const updatedBundles = plugin.bundles(bundles)
             if (is.object(updatedBundles)) {
               // Modify current bundles with changes from the plugin's bundles method
-              bundles = _.mergeWith(
-                _.cloneDeep(bundles),
-                updatedBundles,
-                mergeCustomizer
-              )
+              bundles = _.mergeWith(_.cloneDeep(bundles), updatedBundles, mergeCustomizer)
             }
           } catch (e) {
             // errors being thrown from the plugin's bundles() method will stop the entire
@@ -80,11 +70,7 @@ module.exports = class FrontalBundlesPlugin {
       }
 
       // Merge the initial bundles at the end so that plugins take priority in listing assets by default
-      bundles = _.mergeWith(
-        _.cloneDeep(bundles),
-        app.config.get('bundles'),
-        mergeCustomizer
-      )
+      bundles = _.mergeWith(_.cloneDeep(bundles), app.config.get('bundles'), mergeCustomizer)
 
       // Update the app config with the currently computed bundles for other plugins to rely on
       app.config.set('computed_bundles', bundles)
@@ -128,24 +114,15 @@ module.exports = class FrontalBundlesPlugin {
 
         // group javascript assets to load through the bundle-loader
         const jsFiles = desc.assets.filter(
-          (n) =>
-            ['.js', ''].indexOf(
-              path.extname(
-                is.object(n) ? n.path.split('?')[0] : n.split('?')[0]
-              )
-            ) > -1
+          (n) => ['.js', ''].indexOf(path.extname(is.object(n) ? n.path.split('?')[0] : n.split('?')[0])) > -1
         )
 
-        assets.push(
-          `${JsBundleLoader}?${JSON.stringify({ files: jsFiles })}!${NoOp}`
-        )
+        assets.push(`${JsBundleLoader}?${JSON.stringify({ files: jsFiles })}!${NoOp}`)
 
         // all other files should be imported as its own module
         desc.assets
           .map((a) => (is.object(a) ? a.path : a))
-          .filter(
-            (n) => ['.js', ''].indexOf(path.extname(n.split('?')[0])) === -1
-          )
+          .filter((n) => ['.js', ''].indexOf(path.extname(n.split('?')[0])) === -1)
           .forEach((asset) => {
             assets.push(asset)
           })
@@ -170,25 +147,16 @@ module.exports = class FrontalBundlesPlugin {
 
       for (const name of Object.keys(entries)) {
         const entry = entries[name]
-        const options = EntryOptionPlugin.entryDescriptionToOptions(
-          compiler,
-          name,
-          entry
-        )
+        const options = EntryOptionPlugin.entryDescriptionToOptions(compiler, name, entry)
 
         // Add an entry for each module defined within each chunk
         for (const mod of entry.import) {
           promises.push(
             new Promise((resolve, reject) => {
-              compilation.addEntry(
-                compiler.context,
-                EntryPlugin.createDependency(mod, options),
-                options,
-                (err) => {
-                  if (err) return reject(err)
-                  resolve()
-                }
-              )
+              compilation.addEntry(compiler.context, EntryPlugin.createDependency(mod, options), options, (err) => {
+                if (err) return reject(err)
+                resolve()
+              })
             })
           )
         }

@@ -1,7 +1,9 @@
 const { execSync } = require('child_process')
 
 module.exports = class PackageManager {
-  init() {
+  init(context) {
+    this.context = context
+
     return new Promise((resolve) => {
       this.bin = this.detectBinary()
       resolve()
@@ -22,13 +24,15 @@ module.exports = class PackageManager {
   }
 
   install(name, version) {
+    const cmdOpts = { cwd: this.context, stdio: 'ignore' }
+
     // Handle yarn install
     if (this.bin === 'yarn') {
-      execSync(`yarn add ${name}@${version}`, { stdio: 'ignore' })
+      execSync(`yarn add ${name}@${version}`, cmdOpts)
     }
 
     if (this.bin === 'npm') {
-      execSync(`npm install ${name}@${version}`, { stdio: 'ignore' })
+      execSync(`npm install ${name}@${version}`, cmdOpts)
     }
   }
 }

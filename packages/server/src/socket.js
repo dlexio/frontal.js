@@ -18,18 +18,12 @@ module.exports = class SocketServer {
 
     // Register hooks for invalidation and stats signals
     // console.log('this.frontalApp.webpack.compiler()', this.frontalApp.webpack);
-    this.frontalApp.webpack
-      .compiler()
-      .hooks.compile.tap('frontal-server', invalidateSignal)
-    this.frontalApp.webpack
-      .compiler()
-      .hooks.invalid.tap('frontal-server', invalidateSignal)
-    this.frontalApp.webpack
-      .compiler()
-      .hooks.done.tap('frontal-server', (stats) => {
-        this._sendStats(this.sockets, this.getStats(stats))
-        this._stats = stats
-      })
+    this.frontalApp.webpack.compiler().hooks.compile.tap('frontal-server', invalidateSignal)
+    this.frontalApp.webpack.compiler().hooks.invalid.tap('frontal-server', invalidateSignal)
+    this.frontalApp.webpack.compiler().hooks.done.tap('frontal-server', (stats) => {
+      this._sendStats(this.sockets, this.getStats(stats))
+      this._stats = stats
+    })
   }
 
   // send stats to a socket or multiple sockets

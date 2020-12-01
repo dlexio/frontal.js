@@ -38,10 +38,7 @@ module.exports = class ErrorsPlugin extends fPlugin {
   }
 
   static isFrontalError(err) {
-    return err.originalStack.some(
-      (stackframe) =>
-        stackframe.fileName && stackframe.fileName.includes('frontal.js')
-    )
+    return err.originalStack.some((stackframe) => stackframe.fileName && stackframe.fileName.includes('frontal.js'))
   }
 
   webpack(webpack) {
@@ -63,11 +60,7 @@ class SimpleErrorsPlugin {
 
   extractErrorsFromStats(stats, type) {
     if (this.isMultiStats(stats)) {
-      return stats.stats.reduce(
-        (errors, stats) =>
-          errors.concat(this.extractErrorsFromStats(stats, type)),
-        []
-      )
+      return stats.stats.reduce((errors, stats) => errors.concat(this.extractErrorsFromStats(stats, type)), [])
     }
 
     return stats.compilation[type]
@@ -79,18 +72,12 @@ class SimpleErrorsPlugin {
       const hasWarnings = stats.hasWarnings()
 
       if (hasErrors) {
-        this.friendlyErrorsWebpackPlugin.displayErrors(
-          this.extractErrorsFromStats(stats, 'errors'),
-          'error'
-        )
+        this.friendlyErrorsWebpackPlugin.displayErrors(this.extractErrorsFromStats(stats, 'errors'), 'error')
         return
       }
 
       if (hasWarnings) {
-        this.friendlyErrorsWebpackPlugin.displayErrors(
-          this.extractErrorsFromStats(stats, 'warnings'),
-          'warning'
-        )
+        this.friendlyErrorsWebpackPlugin.displayErrors(this.extractErrorsFromStats(stats, 'warnings'), 'warning')
       }
     })
   }

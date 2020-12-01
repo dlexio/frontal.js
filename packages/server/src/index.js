@@ -100,17 +100,11 @@ module.exports = class Server {
     try {
       await new Promise((resolve, reject) => {
         this.httpServer.on('error', (e) => reject(e))
-        this.httpServer.listen(
-          this.options.port,
-          this.options.host,
-          listenCallback
-        )
+        this.httpServer.listen(this.options.port, this.options.host, listenCallback)
       })
     } catch (err) {
       if (err.code === 'EADDRINUSE') {
-        this.logger.info(
-          `Address \`${this.options.host}:${this.options.port}\` is in use, binding to different port.`
-        )
+        this.logger.info(`Address \`${this.options.host}:${this.options.port}\` is in use, binding to different port.`)
         this.options.port = 0
         return this.start(cb)
       }

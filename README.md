@@ -32,7 +32,7 @@ A modern HTML development framework packed with the most critical and commonly u
 ```
 $ npm i -g frontal.js
 $ frontal init my-project
-$ frontal dev
+$ frontal dev my-project
 ```
 
 ## Documentation

@@ -1,6 +1,7 @@
 const path = require('path')
 const Config = require('@frontal/config')
 const frontal = require('../../frontal')
+process.env.NODE_ENV = 'production'
 
 module.exports = async (dir, cmd) => {
   const cwd = process.cwd()

@@ -2,7 +2,6 @@ const path = require('path')
 const fs = require('fs-extra')
 const consola = require('consola')
 const PackageManager = require('./packageManager')
-const { execSync } = require('child_process')
 const { clearConsole } = require('../utils')
 
 module.exports = class Initiator {
@@ -19,17 +18,20 @@ module.exports = class Initiator {
     await fs.writeFile(file, data)
   }
 
-  async Initiate() {
+  async Initiate(context) {
     const files = this.config.files
     const packages = this.config.packages
 
     // Clear out the console
     clearConsole()
 
+    // Ensure initial project directory exists
+    await fs.ensureDir(context)
+
     // Install packages
     if (Object.keys(packages).length > 0) {
       // Initiate the package manager if needed
-      this.packageManager.init()
+      await this.packageManager.init(context)
 
       this.logger.info('Installing packages...')
 
@@ -44,18 +46,12 @@ module.exports = class Initiator {
     this.logger.info('Writing files...')
     for (const fileName of Object.keys(files)) {
       const fileContent = files[fileName]
-      await this.writeFile(
-        path.join(this.context, fileName),
-        fileContent.join('\n')
-      )
+      await this.writeFile(path.join(this.context, fileName), fileContent.join('\n'))
     }
 
     this.logger.success('Initiated Successfully')
 
     // Auto run frontal dev
-    try {
-      execSync('frontal dev', { stdio: 'inherit' })
-      // eslint-disable-next-line
-    } catch (e) {}
+    this.logger.info(`Run \`$ ${context === '.' ? `frontal dev` : `cd ${context} && frontal dev`}\``)
   }
 }

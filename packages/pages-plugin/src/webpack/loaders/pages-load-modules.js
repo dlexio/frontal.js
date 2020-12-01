@@ -101,18 +101,9 @@ const addModule = (loaderCtx) => {
               //       for example, extract-loader uses babel to eval the source code.
               const builtAssets = Object.keys(module.buildInfo.assets)
               if (builtAssets.length > 0) {
-                done(
-                  null,
-                  path.join(
-                    options.app.config.get('server.base'),
-                    builtAssets[0]
-                  )
-                )
+                done(null, path.join(options.app.config.get('server.base'), builtAssets[0]))
               } else {
-                done(
-                  new Error(`No built assets were found for: ${request}`),
-                  null
-                )
+                done(new Error(`No built assets were found for: ${request}`), null)
               }
             }
           })

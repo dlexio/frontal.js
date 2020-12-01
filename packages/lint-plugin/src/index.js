@@ -11,22 +11,14 @@ module.exports = class LintPlugin extends fPlugin {
     this.app = app
 
     // Auto support eslint
-    const esLintRc = path.join(
-      this.app.cwd(),
-      this.app.context(),
-      '.eslintrc.json'
-    )
+    const esLintRc = path.join(this.app.cwd(), this.app.context(), '.eslintrc.json')
     this.eslint = fs.existsSync(esLintRc)
     this.app.watcher.watch(esLintRc, () => {
       ctx.app.restart()
     })
 
     // Auto support stylelint
-    const styleLintRc = path.join(
-      this.app.cwd(),
-      this.app.context(),
-      '.stylelintrc.json'
-    )
+    const styleLintRc = path.join(this.app.cwd(), this.app.context(), '.stylelintrc.json')
     this.stylelint = fs.existsSync(styleLintRc)
     this.app.watcher.watch(styleLintRc, () => {
       ctx.app.restart()

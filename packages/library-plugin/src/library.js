@@ -138,10 +138,7 @@ class Components {
     this.app.watcher.watch(pattern, (eventType) => {
       this.app.invalidate(() => {
         if (eventType === 'change') {
-          this.app.devServer.socketServer.write(
-            this.app.devServer.socketServer.sockets,
-            'content-changed'
-          )
+          this.app.devServer.socketServer.write(this.app.devServer.socketServer.sockets, 'content-changed')
         }
       })
     })

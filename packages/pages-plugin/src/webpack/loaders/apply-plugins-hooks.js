@@ -25,9 +25,7 @@ module.exports = function (source) {
   const app = options.app
   const beforeEmitHooks = [].concat.apply(
     [],
-    app.plugins
-      .filter((plugin) => plugin.hasHook(hookName))
-      .map((plugin) => plugin.getHooks(hookName))
+    app.plugins.filter((plugin) => plugin.hasHook(hookName)).map((plugin) => plugin.getHooks(hookName))
   )
 
   // Ignore if no hooks were found

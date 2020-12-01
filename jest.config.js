@@ -14,8 +14,6 @@ module.exports = {
   testPathIgnorePatterns: ['examples/.*'],
   moduleFileExtensions: ['js', 'json'],
   moduleNameMapper: {
-    [`@frontal/(${corePackages.join(
-      '|'
-    )})(/?.*)$`]: '<rootDir>/packages/$1/src/$2',
+    [`@frontal/(${corePackages.join('|')})(/?.*)$`]: '<rootDir>/packages/$1/src/$2',
   },
 }

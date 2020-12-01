@@ -29,22 +29,14 @@ module.exports = function (source) {
   // Apply css imports
   if (assets.css.length > 0) {
     assets.css.forEach((f) => {
-      $('head').append(
-        `<link rel="stylesheet" type="text/css" href="${
-          serverBase + f
-        }" as="style">`
-      )
+      $('head').append(`<link rel="stylesheet" type="text/css" href="${serverBase + f}" as="style">`)
     })
   }
 
   // Apply js imports as preloads
   if (assets.js.length > 0) {
     assets.js.forEach((f) => {
-      $('head').append(
-        `<link rel="preload" href="${
-          frontalApp.config.get('server.base') + f
-        }" as="script">`
-      )
+      $('head').append(`<link rel="preload" href="${frontalApp.config.get('server.base') + f}" as="script">`)
     })
   }
 
@@ -70,9 +62,7 @@ module.exports = function (source) {
   // @fixme the following is a hack for fixing slow style load. A better approach would be to extract CSS via a webpack plugin and
   //        separate it in its own module and load that js module in the <head>
   if (frontalApp.inDevMode()) {
-    $('head').append(
-      '<style id="frontal_style">body { display: none; }</style>'
-    )
+    $('head').append('<style id="frontal_style">body { display: none; }</style>')
     $('body').append(`
         <script>
         var frontalStyle = document.getElementById('frontal_style');

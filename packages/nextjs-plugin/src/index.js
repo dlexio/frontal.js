@@ -10,11 +10,7 @@ module.exports = class Nextjs extends fPlugin {
     this.app = frontalApp
 
     // Detect typescript support
-    const tsConfigFile = path.join(
-      this.app.cwd(),
-      this.app.context(),
-      'tsconfig.json'
-    )
+    const tsConfigFile = path.join(this.app.cwd(), this.app.context(), 'tsconfig.json')
     this.typescript = fs.existsSync(tsConfigFile)
     this.app.watcher.watch(tsConfigFile, (event) => {
       if (event === 'add' || event === 'unlink') {

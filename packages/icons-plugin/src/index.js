@@ -107,33 +107,20 @@ const handleIcon = (app, loaderCtx, $, elem, iconsConfig, svgo) => {
 module.exports = class IconsPlugin extends fPlugin {
   constructor(app) {
     super()
-    const iconsPath = path.join(
-      app.cwd(),
-      app.context(),
-      app.config.get('icons.path', 'icons')
-    )
-    const iconsConfigPath = path.join(
-      iconsPath,
-      app.config.get('icons.configFile', 'icons.config.js')
-    )
+    const iconsPath = path.join(app.cwd(), app.context(), app.config.get('icons.path', 'icons'))
+    const iconsConfigPath = path.join(iconsPath, app.config.get('icons.configFile', 'icons.config.js'))
 
     // Register page hook
     const iconsEnabled = app.config.get('icons.enabled', true)
     if (iconsEnabled) {
-      this.addHook(
-        'page:beforeEmit',
-        this.handlePage(iconsPath, iconsConfigPath, app)
-      )
+      this.addHook('page:beforeEmit', this.handlePage(iconsPath, iconsConfigPath, app))
 
       // Add a watcher for the icons.config.js file
       app.watcher.watch(iconsConfigPath, (eventType) => {
         delete require.cache[iconsConfigPath]
         app.invalidate(() => {
           if (eventType === 'change') {
-            app.devServer.socketServer.write(
-              app.devServer.socketServer.sockets,
-              'content-changed'
-            )
+            app.devServer.socketServer.write(app.devServer.socketServer.sockets, 'content-changed')
           }
         })
       })

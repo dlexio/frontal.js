@@ -13,36 +13,20 @@ module.exports = class PagesPlugin extends fPlugin {
       partials: this.app.config.get('pages.partials', '.partials'),
       extensions: this.app.config.get('pages.extensions', ['html']),
     }
-    this.pagesDir = path.join(
-      this.app.cwd(),
-      this.app.context(),
-      this.opts.location
-    )
-    this.partialsDir = path.join(
-      this.app.cwd(),
-      this.app.context(),
-      this.opts.location,
-      this.opts.partials
-    )
+    this.pagesDir = path.join(this.app.cwd(), this.app.context(), this.opts.location)
+    this.partialsDir = path.join(this.app.cwd(), this.app.context(), this.opts.location, this.opts.partials)
 
     // Only apply the following watchers in dev mode
     if (this.app.inDevMode()) {
       // Register a webpack invalidator when detected pages are changed
-      const pagesGlob = path.join(
-        this.pagesDir,
-        `**${path.sep}*.(${this.opts.extensions.join('|')})`
-      )
+      const pagesGlob = path.join(this.pagesDir, `**${path.sep}*.(${this.opts.extensions.join('|')})`)
       this.app.watcher.watch(pagesGlob, (eventType, file) => {
         if (eventType === 'change') {
           this.app.devServer.devMiddleware.waitUntilValid(() => {
             const pageName = file.replace(`${this.pagesDir + path.sep}`, '')
-            this.app.devServer.socketServer.write(
-              this.app.devServer.socketServer.sockets,
-              'page-changed',
-              {
-                name: pageName,
-              }
-            )
+            this.app.devServer.socketServer.write(this.app.devServer.socketServer.sockets, 'page-changed', {
+              name: pageName,
+            })
           })
         }
 
@@ -57,10 +41,7 @@ module.exports = class PagesPlugin extends fPlugin {
       this.app.watcher.watch(partialsGlob, (eventType) => {
         if (eventType === 'change') {
           this.app.devServer.devMiddleware.waitUntilValid(() => {
-            this.app.devServer.socketServer.write(
-              this.app.devServer.socketServer.sockets,
-              'content-changed'
-            )
+            this.app.devServer.socketServer.write(this.app.devServer.socketServer.sockets, 'content-changed')
           })
         }
       })
@@ -79,10 +60,7 @@ module.exports = class PagesPlugin extends fPlugin {
           },
         },
         {
-          loader: path.resolve(
-            __dirname,
-            './webpack/loaders/apply-plugins-hooks.js'
-          ),
+          loader: path.resolve(__dirname, './webpack/loaders/apply-plugins-hooks.js'),
           options: {
             app: this.app,
             pagesDir: this.pagesDir,
@@ -102,20 +80,14 @@ module.exports = class PagesPlugin extends fPlugin {
           },
         },
         {
-          loader: path.resolve(
-            __dirname,
-            './webpack/loaders/pages-load-modules.js'
-          ),
+          loader: path.resolve(__dirname, './webpack/loaders/pages-load-modules.js'),
           options: {
             app: this.app,
             pagesDir: this.pagesDir,
           },
         },
         {
-          loader: path.resolve(
-            __dirname,
-            './webpack/loaders/pages-posthtml.js'
-          ),
+          loader: path.resolve(__dirname, './webpack/loaders/pages-posthtml.js'),
           options: {
             app: this.app,
             pagesDir: this.pagesDir,

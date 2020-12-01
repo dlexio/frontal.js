@@ -1,10 +1,4 @@
-const {
-  merge,
-  mergeWithRules,
-  mergeWithCustomize,
-  customizeArray,
-  unique,
-} = require('webpack-merge')
+const { merge, mergeWithRules, mergeWithCustomize, customizeArray, unique } = require('webpack-merge')
 
 module.exports = class WebpackConfig {
   constructor() {
@@ -29,11 +23,7 @@ module.exports = class WebpackConfig {
 
   addPlugin(plugin) {
     this._config = mergeWithCustomize({
-      customizeArray: unique(
-        'plugins',
-        [],
-        (plugin) => plugin.constructor && plugin.constructor.name
-      ),
+      customizeArray: unique('plugins', [], (plugin) => plugin.constructor && plugin.constructor.name),
     })(this._config, { plugins: [plugin] })
   }
 

@@ -67,11 +67,7 @@ module.exports = class Frontal {
    * Returns the full path of the public directory
    */
   public() {
-    return path.join(
-      this.cwd(),
-      this.context(),
-      this.config.get('server.public')
-    )
+    return path.join(this.cwd(), this.context(), this.config.get('server.public'))
   }
 
   /**
@@ -114,16 +110,12 @@ module.exports = class Frontal {
 
         // Fail if the plugin is not extending @frontal/plugin
         if (!(module.prototype instanceof fPlugin)) {
-          this.logger.error(
-            `\`${plugin.plugin}\` is not a valid Frontal plugin.`
-          )
+          this.logger.error(`\`${plugin.plugin}\` is not a valid Frontal plugin.`)
         }
 
         this.plugins.push(new module(this, opts))
       } catch (e) {
-        this.logger.error(
-          `\`${plugin.plugin}\` failed to load Frontal plugin due to: ${e.message}`
-        )
+        this.logger.error(`\`${plugin.plugin}\` failed to load Frontal plugin due to: ${e.message}`)
       }
     }
   }
@@ -159,20 +151,12 @@ module.exports = class Frontal {
       // Restart the entire development server if changes requires it to:
       // @todo the following array that identifies which config props requires a restart should be provided via a hook that plugins can tell on their own
       //       which properties requires a restart
-      if (
-        Object.keys(diff).some((r) =>
-          ['server', 'build', 'pages', 'plugins', 'icons'].includes(r)
-        )
-      ) {
+      if (Object.keys(diff).some((r) => ['server', 'build', 'pages', 'plugins', 'icons'].includes(r))) {
         this.logger.info('Restarting development server')
         this.restart()
       } else {
         this.invalidate(() => {
-          this.devServer.socketServer.write(
-            this.devServer.socketServer.sockets,
-            'content-changed',
-            { target: '*' }
-          )
+          this.devServer.socketServer.write(this.devServer.socketServer.sockets, 'content-changed', { target: '*' })
         })
       }
     })

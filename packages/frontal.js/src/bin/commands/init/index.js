@@ -2,15 +2,7 @@ const path = require('path')
 const inquirer = require('inquirer')
 const Initiator = require('./initiator')
 const InitiatorConfig = require('./initiatorConfig')
-const {
-  basicHtml,
-  basicCss,
-  bulmaHtml,
-  bulmaCss,
-  bootstrapHtml,
-  bootstrapCss,
-  tailwindHtml,
-} = require('./examples')
+const { basicHtml, basicCss, bulmaHtml, bulmaCss, bootstrapHtml, bootstrapCss, tailwindHtml } = require('./examples')
 
 module.exports = async (dir) => {
   const initiatorConfig = new InitiatorConfig()
@@ -37,9 +29,7 @@ module.exports = async (dir) => {
     frontalIndexBody = basicHtml
 
     // In all cases, frontal.js requires at-least one .js asset
-    initiatorConfig.addFile('assets/js/app.js', [
-      '// @todo write your application code...',
-    ])
+    initiatorConfig.addFile('assets/js/app.js', ['// @todo write your application code...'])
     frontalMainAssets.push('@assets/js/app.js')
   }
 
@@ -85,12 +75,6 @@ module.exports = async (dir) => {
             value: 'stylelint',
           },
         ],
-      },
-      {
-        type: 'confirm',
-        name: 'library',
-        message: 'Initiate with a basic Frontal UI library?',
-        default: false,
       },
     ])
 
@@ -197,15 +181,11 @@ module.exports = async (dir) => {
       ])
 
       // In all cases, frontal.js requires at-least one .js asset
-      initiatorConfig.addFile('assets/js/app.ts', [
-        '// @todo write your application code...',
-      ])
+      initiatorConfig.addFile('assets/js/app.ts', ['// @todo write your application code...'])
       frontalMainAssets.push('@assets/js/app.ts')
     } else {
       // In all cases, frontal.js requires at-least one .js asset
-      initiatorConfig.addFile('assets/js/app.js', [
-        '// @todo write your application code...',
-      ])
+      initiatorConfig.addFile('assets/js/app.js', ['// @todo write your application code...'])
       frontalMainAssets.push('@assets/js/app.js')
     }
 
@@ -231,15 +211,9 @@ module.exports = async (dir) => {
       ])
     }
 
-    if (
-      customInit.devFeatures.includes('postcss') &&
-      customInit.cssFramework !== 'tailwindcss'
-    ) {
+    if (customInit.devFeatures.includes('postcss') && customInit.cssFramework !== 'tailwindcss') {
       initiatorConfig.addPackage('postcss', 'latest')
-      initiatorConfig.addFile('postcss.config.js', [
-        'module.exports = () => ({',
-        '});',
-      ])
+      initiatorConfig.addFile('postcss.config.js', ['module.exports = () => ({', '});'])
     }
 
     if (customInit.devFeatures.includes('eslint')) {
@@ -292,10 +266,7 @@ module.exports = async (dir) => {
     '\tbundles: {',
     '\t\tmain: {',
     '\t\t\tassets: [',
-    ...frontalMainAssets.map(
-      (asset, i) =>
-        `\t\t\t\t'${asset}'${i + 1 !== frontalMainAssets.length ? ',' : ''}`
-    ),
+    ...frontalMainAssets.map((asset, i) => `\t\t\t\t'${asset}'${i + 1 !== frontalMainAssets.length ? ',' : ''}`),
     '\t\t\t],',
     "\t\t\tpages: ['**/*.html']",
     '\t\t}',
@@ -309,7 +280,7 @@ module.exports = async (dir) => {
   const location = path.join(cwd, context)
   const initiator = new Initiator(location, initiatorConfig)
   try {
-    await initiator.Initiate()
+    await initiator.Initiate(context)
   } catch (e) {
     console.error(e)
     process.exit(1)

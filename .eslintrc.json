@@ -17,10 +17,7 @@
       }
     },
     {
-      "files": [
-        "packages/hmr-plugin/src/hot/*.js",
-        "packages/hmr-plugin/src/client/**/*.js"
-      ],
+      "files": ["packages/hmr-plugin/src/hot/*.js", "packages/hmr-plugin/src/client/**/*.js"],
       "env": {
         "es6": false,
         "browser": true
