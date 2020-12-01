@@ -3,19 +3,6 @@
   "version": "independent",
   "conventionalCommits": true,
   "useWorkspaces": true,
-  "command": {
-    "version": {
-      "exact": true
-    },
-    "publish": {
-      "npmClient": "npm",
-      "allowBranch": [
-        "main",
-        "canary"
-      ],
-      "registry": "https://registry.npmjs.org/"
-    }
-  },
   "packages": [
     "packages/*"
   ],
