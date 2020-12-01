@@ -1,6 +1,6 @@
 {
   "name": "@frontal/nextjs-plugin",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "license": "MIT",
   "main": "src/index.js",
   "files": [
@@ -17,7 +17,7 @@
   "dependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
-    "@frontal/plugin": "^0.1.2",
+    "@frontal/plugin": "^0.1.3",
     "babel-loader": "^8.2.1",
     "cache-loader": "^4.1.0",
     "fork-ts-checker-webpack-plugin": "^6.0.1",

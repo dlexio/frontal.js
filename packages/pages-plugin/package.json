@@ -1,6 +1,6 @@
 {
   "name": "@frontal/pages-plugin",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Frontal's pages plugin",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "directory": "packages/pages-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.2",
+    "@frontal/plugin": "^0.1.3",
     "cheerio": "^1.0.0-rc.3",
     "extract-loader": "^5.1.0",
     "file-loader": "^6.2.0",

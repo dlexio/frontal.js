@@ -1,6 +1,6 @@
 {
   "name": "@frontal/icons-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Replace <icon> tag within HTML templates with inline SVGs",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "directory": "packages/icons-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.2",
+    "@frontal/plugin": "^0.1.3",
     "cheerio": "^1.0.0-rc.3",
     "is": "^3.3.0",
     "svgo": "^1.3.2"

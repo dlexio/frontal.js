@@ -1,6 +1,6 @@
 {
   "name": "@frontal/webpack",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
   "main": "src/webpack.js",
