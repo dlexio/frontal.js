@@ -15,5 +15,6 @@
     "url": "https://github.com/dlexio/frontal.js.git",
     "directory": "packages/plugin"
   },
-  "scripts": {}
+  "scripts": {},
+  "gitHead": "c3c58ff90fa6f8094893b5e604229fa0df9044df"
 }

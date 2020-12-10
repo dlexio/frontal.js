@@ -21,5 +21,6 @@
     "loglevel": "^1.7.0",
     "sockjs-client": "^1.5.0",
     "url": "^0.11.0"
-  }
+  },
+  "gitHead": "c3c58ff90fa6f8094893b5e604229fa0df9044df"
 }

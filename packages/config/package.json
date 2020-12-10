@@ -31,5 +31,6 @@
     "is": "^3.3.0",
     "lodash": "^4.17.20",
     "schema-utils": "^3.0.0"
-  }
+  },
+  "gitHead": "c3c58ff90fa6f8094893b5e604229fa0df9044df"
 }
