@@ -39,6 +39,9 @@ module.exports = class PagesPlugin extends fPlugin {
       // Emit page-changed events when partials are updated
       const partialsGlob = path.join(this.partialsDir, `**${path.sep}*.html`)
       this.app.watcher.watch(partialsGlob, (eventType) => {
+        // Invalidate only when modules are updated
+        this.app.invalidate()
+
         if (eventType === 'change') {
           this.app.devServer.devMiddleware.waitUntilValid(() => {
             this.app.devServer.socketServer.write(this.app.devServer.socketServer.sockets, 'content-changed')

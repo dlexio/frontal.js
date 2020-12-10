@@ -16,6 +16,7 @@ module.exports = async (dir) => {
       name: 'mode',
       message: 'Choose initiation mode',
       choices: [
+        { name: 'Minimal', value: 'minimal' },
         { name: 'Basic', value: 'basic' },
         { name: 'Custom', value: 'custom' },
       ],
@@ -31,6 +32,12 @@ module.exports = async (dir) => {
     // In all cases, frontal.js requires at-least one .js asset
     initiatorConfig.addFile('assets/js/app.js', ['// @todo write your application code...'])
     frontalMainAssets.push('@assets/js/app.js')
+  }
+
+  // Define initiator with minimal setup
+  if (mode === 'minimal') {
+    frontalIndexBody = ['<div class="container">', '\t<h2>Hello World</h2>', '</div>']
+    initiatorConfig.addFile('assets/app.js', ['// @todo write your application code...'])
   }
 
   // Define initiator options when mode is basic
@@ -58,22 +65,11 @@ module.exports = async (dir) => {
         name: 'devFeatures',
         message: 'Choose your development features',
         choices: [
-          {
-            name: 'Babel',
-            value: 'babel',
-            checked: true,
-          },
+          { name: 'Babel', value: 'babel' },
           { name: 'Typescript', value: 'typescript' },
           { name: 'PostCSS', value: 'postcss' },
-          {
-            name: 'ESLint',
-            value: 'eslint',
-            checked: true,
-          },
-          {
-            name: 'Stylelint',
-            value: 'stylelint',
-          },
+          { name: 'ESLint', value: 'eslint' },
+          { name: 'Stylelint', value: 'stylelint' },
         ],
       },
     ])
@@ -261,18 +257,20 @@ module.exports = async (dir) => {
   ])
 
   // Prepare frontal.config.js file based on previous configuration
-  initiatorConfig.addFile('frontal.config.js', [
-    'module.exports = {',
-    '\tbundles: {',
-    '\t\tmain: {',
-    '\t\t\tassets: [',
-    ...frontalMainAssets.map((asset, i) => `\t\t\t\t'${asset}'${i + 1 !== frontalMainAssets.length ? ',' : ''}`),
-    '\t\t\t],',
-    "\t\t\tpages: ['**/*.html']",
-    '\t\t}',
-    '\t}',
-    '}',
-  ])
+  if (mode !== 'minimal') {
+    initiatorConfig.addFile('frontal.config.js', [
+      'module.exports = {',
+      '\tbundles: {',
+      '\t\tmain: {',
+      '\t\t\tassets: [',
+      ...frontalMainAssets.map((asset, i) => `\t\t\t\t'${asset}'${i + 1 !== frontalMainAssets.length ? ',' : ''}`),
+      '\t\t\t],',
+      "\t\t\tpages: ['**/*.html']",
+      '\t\t}',
+      '\t}',
+      '}',
+    ])
+  }
 
   // Create a new Initiator instance
   const cwd = process.cwd()

@@ -14,7 +14,7 @@ module.exports = (frontalApp) => {
     },
     resolve: {
       alias: {
-        '@assets': path.join(frontalApp.cwd(), frontalApp.context(), frontalApp.config.get('assets.path')),
+        '@assets': path.join(frontalApp.cwd(), frontalApp.context(), frontalApp.config.get('directories.assets')),
       },
       modules: ['node_modules', path.join(frontalApp.cwd(), frontalApp.context(), './node_modules')],
     },
@@ -50,6 +50,6 @@ module.exports = (frontalApp) => {
         },
       },
     },
-    plugins: [new WebpackBar(), new TimeFixPlugin(), new frontalBundlesPlugin(frontalApp)],
+    plugins: [new WebpackBar({ name: frontalApp.name() }), new TimeFixPlugin(), new frontalBundlesPlugin(frontalApp)],
   }
 }

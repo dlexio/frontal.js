@@ -29,7 +29,7 @@ module.exports = class Nextjs extends fPlugin {
     // Add support for Babel
     config.addModuleRule({
       test: /\.m?js$/,
-      exclude: /(node_modules|bower_components)/,
+      exclude: /(node_modules|bower_components|\.file.js)/,
       use: [
         require.resolve('cache-loader'),
         {

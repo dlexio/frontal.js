@@ -32,7 +32,7 @@ A modern HTML development framework packed with the most critical and commonly u
 ```
 $ npm i -g frontal.js
 $ frontal init my-project
-$ frontal dev my-project
+$ cd my-project && frontal dev
 ```
 
 ## Documentation
@@ -41,4 +41,4 @@ View the full documentation at [https://dlex.io/frontal/docs](https://dlex.io/fr
 
 ## Contribution
 
-Read the [contributing.md](/contributing.md) guide.
+Read the [contributing](https://dlex.io/frontal/docs/extending/contributions.html) guide.

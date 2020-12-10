@@ -93,7 +93,17 @@ const handleIcon = (app, loaderCtx, $, elem, iconsConfig, svgo) => {
         svgo
           .optimize(data.toString())
           .then((res) => {
-            $(elem).replaceWith(constructIcon(attrs, res.data, res.info))
+            const $icon = cheerio.load(res.data)
+
+            // Apply all attributes to the SVG
+            Object.keys(attrs)
+              .filter((attrKey) => ['src', 'set', 'name'].indexOf(attrKey) === -1)
+              .forEach((attrKey) => {
+                const attrVal = attrs[attrKey]
+                $icon('svg').attr(attrKey, attrVal)
+              })
+
+            $(elem).replaceWith(constructIcon(attrs, $icon.html(), res.info))
             resolve()
           })
           .catch((e) => {

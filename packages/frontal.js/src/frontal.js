@@ -170,7 +170,7 @@ module.exports = class Frontal {
     const server = new Server(this, {
       host: this.config.get('server.host'),
       port: this.config.get('server.port'),
-      contentBase: path.join(this.cwd(), this.config.get('build.path')),
+      contentBase: path.join(this.cwd(), this.config.get('directories.build')),
     })
 
     this._startServer(server)

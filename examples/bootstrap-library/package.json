@@ -1,0 +1,13 @@
+{
+  "name": "bootstrap-library",
+  "scripts": {
+    "dev": "frontal dev",
+    "build": "frontal build",
+    "serve": "frontal serve"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.5.3",
+    "frontal.js": "latest",
+    "jquery": "^3.5.1"
+  }
+}

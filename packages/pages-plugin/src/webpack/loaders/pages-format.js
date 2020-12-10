@@ -11,7 +11,10 @@ const minify = require('html-minifier-terser').minify
 module.exports = function (source) {
   const options = getOptions(this)
   const frontalApp = options.app
-  const formatMode = frontalApp.config.get('pages.html.format', false)
+  const formatMode = frontalApp.config.get(
+    'pages.html.format',
+    process.env.NODE_ENV === 'production' ? 'minify' : 'beautify'
+  )
 
   // Handle beautify mode
   if (formatMode === 'beautify') {

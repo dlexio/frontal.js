@@ -1,7 +1,7 @@
 const path = require('path')
 const { getOptions } = require('loader-utils')
 const posthtml = require('posthtml')
-const include = require('posthtml-include')
+const modules = require('posthtml-modules')
 
 /**
  * Posthtml integration loader for the partials feature
@@ -10,27 +10,31 @@ const include = require('posthtml-include')
  * @returns {string}
  */
 module.exports = function (source) {
+  this.cacheable(false)
   const ctx = this,
     callback = ctx.async(),
     options = getOptions(ctx)
+  const app = options.app
 
   const posthtmlPlugins = [
-    include({
-      encoding: 'utf8',
-      root: path.join(options.partialsDir, '/'),
+    modules({
+      initial: true,
+      tag: 'partial',
+      attribute: 'src',
+      root: path.join(
+        app.cwd(),
+        app.context(),
+        app.config.get('pages.location', 'pages'),
+        app.config.get('pages.partials', '.partials'),
+        '/'
+      ),
+      from: '/',
     }),
   ]
 
   posthtml(posthtmlPlugins)
     .process(source)
     .then((result) => {
-      // Check messages of type dependency to add them to webpack as a dependency
-      result.messages
-        .filter((m) => m.type === 'dependency')
-        .forEach((msg) => {
-          ctx.addDependency(msg.file)
-        })
-
       callback(null, result.html)
     })
     .catch((e) => {

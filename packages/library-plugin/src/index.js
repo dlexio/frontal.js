@@ -3,7 +3,6 @@ const fs = require('fs')
 const is = require('is')
 const fPlugin = require('@frontal/plugin')
 const library = require('./library')
-const defaultLibraryLocation = './library/library.config.js'
 
 /**
  * Libraries in frontal, augments frontal applications with pre-configured assets
@@ -26,6 +25,9 @@ module.exports = class LibraryPlugin extends fPlugin {
   constructor(app, opts) {
     super(app, opts)
     this.app = app
+
+    // Define default path for library
+    this.defaultLibraryLocation = path.resolve(this.app.cwd(), this.app.context(), './library/library.config.js')
 
     // holds the library options to later be used when registering a library
     // for setting up components
@@ -126,6 +128,18 @@ module.exports = class LibraryPlugin extends fPlugin {
         },
       ],
     })
+
+    // Add library resolve
+    const libraryConfig = this.app.config.get('library.location', this.defaultLibraryLocation)
+    const libraryDir = path.dirname(libraryConfig)
+    config.merge({
+      resolve: {
+        alias: {
+          '@library': libraryDir,
+        },
+        modules: [path.join(libraryDir, './node_modules')],
+      },
+    })
   }
 
   /**
@@ -145,16 +159,16 @@ module.exports = class LibraryPlugin extends fPlugin {
 
     // 0) get configuration options
     const opts = {
-      location: this.app.config.get('library.location', defaultLibraryLocation),
+      location: this.app.config.get('library.location', this.defaultLibraryLocation),
       bundle: this.app.config.get('library.bundle', 'main'),
       options: this.app.config.get('library.options', {}),
     }
     this.libOpts = {
-      dir: path.join(this.app.cwd(), this.app.context(), path.dirname(opts.location)),
+      dir: path.dirname(opts.location),
     }
 
     // 1) resolve the library entry file
-    const libEntryPath = this.getLibraryEntryPath(opts.location)
+    const libEntryPath = opts.location
 
     // Silently ignore if the library file was not found
     try {

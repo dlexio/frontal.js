@@ -2,9 +2,9 @@ const path = require('path')
 const Config = require('@frontal/config')
 const frontal = require('../../frontal')
 const open = require('open')
-process.env.NODE_ENV = 'development'
 
 module.exports = (dir, cmd) => {
+  process.env.NODE_ENV = 'development'
   const cwd = process.cwd()
   const opts = cmd.opts()
 

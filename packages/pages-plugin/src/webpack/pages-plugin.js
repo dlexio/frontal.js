@@ -62,7 +62,7 @@ module.exports = class PagesWebpackPlugin {
     const traversePages = () =>
       new Promise((resolve) => {
         // get bundles configuration
-        const configBundles = this.app.config.get('computed_bundles')
+        const configBundles = this.app.config.get('computed_bundles', this.app.config.get('bundles'))
 
         // Get pages
         const pagesGlob = path.join(this.dir, '**', `*.*(${this.opts.extensions.join('|')})`)
@@ -220,7 +220,15 @@ module.exports = class PagesWebpackPlugin {
       compilation.hooks.processAssets.tapAsync(id, (assets, callback) => {
         traversePages().then((pages) => {
           pages.forEach((page) => {
-            const pageAssetMatch = pm(`assets${path.sep}js${path.sep + page.name}.*.js`)
+            const pageAssetMatch = pm(
+              `${
+                this.app.config.get('build.assets.into') +
+                path.sep +
+                this.app.config.get('build.js.into') +
+                path.sep +
+                page.name
+              }.*.js`
+            )
 
             Object.keys(assets).forEach((assetName) => {
               if (pageAssetMatch(assetName)) {
