@@ -65,8 +65,19 @@ module.exports = class Config {
     // Load a fresh copy of the configuration
     const customConfig = this.getFileConfig()
 
+    // Reset custom config plugins array
+    const customConfigPlugins = _.cloneDeep(customConfig.plugins)
+    customConfig.plugins = []
+
     // Apply custom configuration to the default configuration
     const conf = _.defaultsDeep({}, customConfig, this.data)
+
+    // Append custom plugins
+    if (customConfigPlugins.length > 0) {
+      customConfigPlugins.forEach((customPlugin) => {
+        conf.plugins.push(customPlugin)
+      })
+    }
 
     // Replace bundles entirely
     if (customConfig.bundles !== undefined) {

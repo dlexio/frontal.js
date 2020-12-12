@@ -32,16 +32,16 @@ const replaceFromMap = (map, str) => {
   return str
 }
 
-const handleIcon = (app, loaderCtx, $, elem, iconsConfig, svgo) => {
-  const computeSrc = is.function(iconsConfig.computeSrc)
-    ? iconsConfig.computeSrc
-    : (iconsPath, attrs) => {
-        return path.join('~', iconsPath, attrs.set, attrs.name)
+const handleSvg = (app, loaderCtx, $, elem, svgsConfig, svgo) => {
+  const computeSrc = is.function(svgsConfig.computeSrc)
+    ? svgsConfig.computeSrc
+    : (svgsPath, attrs) => {
+        return path.join('~', svgsPath, attrs.set, attrs.name)
       }
-  const constructIcon = is.function(iconsConfig.construct)
-    ? iconsConfig.construct
-    : (attrs, icon) => {
-        return icon
+  const constructSvg = is.function(svgsConfig.construct)
+    ? svgsConfig.construct
+    : (attrs, svg) => {
+        return svg
       }
 
   return new Promise((resolve, reject) => {
@@ -55,11 +55,11 @@ const handleIcon = (app, loaderCtx, $, elem, iconsConfig, svgo) => {
       svg = src
     } else {
       // Use the computeSrc method
-      svg = computeSrc(app.config.get('icons.path', 'icons'), attrs)
+      svg = computeSrc(app.config.get('svgs.path', 'svgs'), attrs)
     }
 
     // Apply replacements
-    svg = replaceFromMap(iconsConfig.map, svg)
+    svg = replaceFromMap(svgsConfig.map, svg)
 
     // Add extension if not found
     if (path.extname(svg) === '') {
@@ -89,21 +89,21 @@ const handleIcon = (app, loaderCtx, $, elem, iconsConfig, svgo) => {
           return
         }
 
-        // Optimize SVG icon
+        // Optimize SVG
         svgo
           .optimize(data.toString())
           .then((res) => {
-            const $icon = cheerio.load(res.data)
+            const $svg = cheerio.load(res.data)
 
             // Apply all attributes to the SVG
             Object.keys(attrs)
               .filter((attrKey) => ['src', 'set', 'name'].indexOf(attrKey) === -1)
               .forEach((attrKey) => {
                 const attrVal = attrs[attrKey]
-                $icon('svg').attr(attrKey, attrVal)
+                $svg('svg').attr(attrKey, attrVal)
               })
 
-            $(elem).replaceWith(constructIcon(attrs, $icon.html(), res.info))
+            $(elem).replaceWith(constructSvg(attrs, $svg.html(), res.info))
             resolve()
           })
           .catch((e) => {
@@ -114,20 +114,20 @@ const handleIcon = (app, loaderCtx, $, elem, iconsConfig, svgo) => {
   })
 }
 
-module.exports = class IconsPlugin extends fPlugin {
+module.exports = class SvgsPlugin extends fPlugin {
   constructor(app) {
     super()
-    const iconsPath = path.join(app.cwd(), app.context(), app.config.get('icons.path', 'icons'))
-    const iconsConfigPath = path.join(iconsPath, app.config.get('icons.configFile', 'icons.config.js'))
+    const svgsPath = path.join(app.cwd(), app.context(), app.config.get('svgs.path', 'svgs'))
+    const svgsConfigPath = path.join(svgsPath, app.config.get('svgs.configFile', 'svgs.config.js'))
 
     // Register page hook
-    const iconsEnabled = app.config.get('icons.enabled', true)
-    if (iconsEnabled) {
-      this.addHook('page:beforeEmit', this.handlePage(iconsPath, iconsConfigPath, app))
+    const svgsEnabled = app.config.get('svgs.enabled', true)
+    if (svgsEnabled) {
+      this.addHook('page:beforeEmit', this.handlePage(svgsPath, svgsConfigPath, app))
 
-      // Add a watcher for the icons.config.js file
-      app.watcher.watch(iconsConfigPath, (eventType) => {
-        delete require.cache[iconsConfigPath]
+      // Add a watcher for the svgs.config.js file
+      app.watcher.watch(svgsConfigPath, (eventType) => {
+        delete require.cache[svgsConfigPath]
         app.invalidate(() => {
           if (eventType === 'change') {
             app.devServer.socketServer.write(app.devServer.socketServer.sockets, 'content-changed')
@@ -137,10 +137,10 @@ module.exports = class IconsPlugin extends fPlugin {
     }
   }
 
-  handlePage(iconsPath, iconsConfigPath, app) {
-    // Get icons config
-    const defaultIconsConfig = {
-      tag: 'icon',
+  handlePage(svgsPath, svgsConfigPath, app) {
+    // Get svgs config
+    const defaultSvgsConfig = {
+      tag: 'i-svg',
       map: {},
     }
 
@@ -148,32 +148,32 @@ module.exports = class IconsPlugin extends fPlugin {
       const $ = cheerio.load(content)
 
       // If a config file was found, use its exported config instead of the default one
-      let iconsConfig
+      let svgsConfig
       try {
-        iconsConfig = require(iconsConfigPath)
+        svgsConfig = require(svgsConfigPath)
       } catch (e) {
-        iconsConfig = defaultIconsConfig
+        svgsConfig = defaultSvgsConfig
       }
-      iconsConfig.location = iconsPath
+      svgsConfig.location = svgsPath
 
       // Apply default optimize options if not available
-      if (is.undefined(iconsConfig.optimize)) {
-        iconsConfig.optimize = {
+      if (is.undefined(svgsConfig.optimize)) {
+        svgsConfig.optimize = {
           stripDimensions: true,
         }
       }
 
       // Initiate a new SVGo instance with plugins based on options
       const svgo = new SVGo({
-        plugins: [{ removeDimensions: iconsConfig.optimize.stripDimensions }],
+        plugins: [{ removeDimensions: svgsConfig.optimize.stripDimensions }],
       })
 
-      // Create promises for each icon
+      // Create promises for svgs
       const promises = []
 
-      // Crawl content for <icon> tags
-      $(iconsConfig.tag).each((i, elem) => {
-        promises.push(handleIcon(app, loaderCtx, $, elem, iconsConfig, svgo))
+      // Crawl content for <i-tag> tags
+      $(svgsConfig.tag).each((i, elem) => {
+        promises.push(handleSvg(app, loaderCtx, $, elem, svgsConfig, svgo))
       })
 
       // Wait for all promises to resolve

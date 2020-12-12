@@ -97,7 +97,7 @@ module.exports = {
       options: {},
     },
     {
-      plugin: require.resolve('@frontal/icons-plugin'),
+      plugin: require.resolve('@frontal/svgs-plugin'),
       options: {},
     },
   ],

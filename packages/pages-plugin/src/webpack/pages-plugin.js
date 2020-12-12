@@ -40,6 +40,13 @@ module.exports = class PagesWebpackPlugin {
     const getPageBundles = (pageName, bundles) =>
       Object.keys(bundles)
         .map((bundleName) => ({ name: bundleName, desc: bundles[bundleName] }))
+        .map((bundle) => {
+          if (bundle.desc.pages.length === 0) {
+            bundle.desc.pages = ['**/*.html']
+          }
+
+          return bundle
+        })
         .filter((bundle) => is.array(bundle.desc.pages))
         .map(({ name, desc }) => {
           let fBundle = ''

@@ -2,7 +2,6 @@ const is = require('is')
 const path = require('path')
 const consola = require('consola')
 const webpack = require('@frontal/webpack')
-const fPlugin = require('@frontal/plugin')
 const Server = require('@frontal/server')
 const Watcher = require('./watcher')
 
@@ -108,10 +107,10 @@ module.exports = class Frontal {
         module = require(plugin.plugin)
         opts = plugin.options !== undefined ? plugin.options : {}
 
-        // Fail if the plugin is not extending @frontal/plugin
-        if (!(module.prototype instanceof fPlugin)) {
-          this.logger.error(`\`${plugin.plugin}\` is not a valid Frontal plugin.`)
-        }
+        // Fail if the plugin is not extending @frontal/plugin @fixme this check fails if @frontal/plugin is installed locally within a different node_modules directory
+        // if (!(module.prototype instanceof fPlugin)) {
+        //   this.logger.error(`\`${plugin.plugin}\` is not a valid Frontal plugin.`)
+        // }
 
         this.plugins.push(new module(this, opts))
       } catch (e) {
@@ -151,7 +150,7 @@ module.exports = class Frontal {
       // Restart the entire development server if changes requires it to:
       // @todo the following array that identifies which config props requires a restart should be provided via a hook that plugins can tell on their own
       //       which properties requires a restart
-      if (Object.keys(diff).some((r) => ['server', 'build', 'pages', 'plugins', 'icons'].includes(r))) {
+      if (Object.keys(diff).some((r) => ['server', 'build', 'pages', 'plugins', 'svgs'].includes(r))) {
         this.logger.info('Restarting development server')
         this.restart()
       } else {

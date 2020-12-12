@@ -20,7 +20,7 @@
     "@frontal/errors-plugin": "^0.1.9",
     "@frontal/files-plugin": "^0.1.6",
     "@frontal/hmr-plugin": "^0.1.9",
-    "@frontal/icons-plugin": "^0.1.3",
+    "@frontal/svgs-plugin": "^0.1.0",
     "@frontal/library-plugin": "^0.1.11",
     "@frontal/lint-plugin": "^0.1.6",
     "@frontal/nextjs-plugin": "^0.1.9",
