@@ -66,7 +66,7 @@ module.exports = class Config {
     const customConfig = this.getFileConfig()
 
     // Reset custom config plugins array
-    const customConfigPlugins = _.cloneDeep(customConfig.plugins)
+    const customConfigPlugins = _.cloneDeep(customConfig.plugins || [])
     customConfig.plugins = []
 
     // Apply custom configuration to the default configuration
