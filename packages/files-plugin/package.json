@@ -1,6 +1,6 @@
 {
   "name": "@frontal/files-plugin",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Support loading Image, Fonts, SVGs and other files",
   "license": "MIT",
   "main": "src/index.js",
@@ -16,7 +16,7 @@
     "directory": "packages/files-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.5",
+    "@frontal/plugin": "^0.1.6",
     "image-minimizer-webpack-plugin": "^1.0.0",
     "image-webpack-loader": "^7.0.1"
   },

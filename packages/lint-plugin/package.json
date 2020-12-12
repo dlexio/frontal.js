@@ -1,6 +1,6 @@
 {
   "name": "@frontal/lint-plugin",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Provides eslint and stylelint support",
   "license": "MIT",
   "main": "src/index.js",
@@ -16,7 +16,7 @@
     "directory": "packages/lint-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.5",
+    "@frontal/plugin": "^0.1.6",
     "eslint": "^7.14.0",
     "eslint-webpack-plugin": "^2.4.0",
     "stylelint": "^13.8.0",
