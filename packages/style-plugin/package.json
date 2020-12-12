@@ -1,6 +1,6 @@
 {
   "name": "@frontal/style-plugin",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
   "main": "src/index.js",
@@ -16,7 +16,7 @@
     "directory": "packages/style-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.4",
+    "@frontal/plugin": "^0.1.5",
     "@fullhuman/postcss-purgecss": "^3.0.0",
     "cache-loader": "^4.1.0",
     "css-loader": "^5.0.1",

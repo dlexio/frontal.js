@@ -1,6 +1,6 @@
 {
   "name": "@frontal/errors-plugin",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
   "main": "src/index.js",
@@ -16,7 +16,7 @@
     "directory": "packages/errors-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.4",
+    "@frontal/plugin": "^0.1.5",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "webpack": "^5.10.0"
   },

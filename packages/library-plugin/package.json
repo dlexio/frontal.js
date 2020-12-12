@@ -1,6 +1,6 @@
 {
   "name": "@frontal/library-plugin",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
   "main": "src/index.js",
@@ -16,7 +16,7 @@
     "directory": "packages/library-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.4",
+    "@frontal/plugin": "^0.1.5",
     "glob": "^7.1.6",
     "is": "^3.3.0"
   },

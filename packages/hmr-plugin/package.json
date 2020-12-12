@@ -1,6 +1,6 @@
 {
   "name": "@frontal/hmr-plugin",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
   "main": "src/index.js",
@@ -17,7 +17,7 @@
     "directory": "packages/hmr-plugin"
   },
   "dependencies": {
-    "@frontal/plugin": "^0.1.4",
+    "@frontal/plugin": "^0.1.5",
     "loglevel": "^1.7.0",
     "sockjs-client": "^1.5.0",
     "url": "^0.11.0"
