@@ -1,0 +1,11 @@
+{
+  "name": "with-typescript",
+  "scripts": {
+    "dev": "frontal dev",
+    "build": "frontal build",
+    "serve": "frontal serve"
+  },
+  "devDependencies": {
+    "frontal.js": "latest"
+  }
+}
