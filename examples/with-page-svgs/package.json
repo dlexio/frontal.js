@@ -1,0 +1,14 @@
+{
+  "name": "with-page-svgs",
+  "scripts": {
+    "dev": "frontal dev",
+    "build": "frontal build",
+    "serve": "frontal serve"
+  },
+  "devDependencies": {
+    "frontal.js": "latest"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2"
+  }
+}

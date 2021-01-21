@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Frontal.JS Application</title>
+</head>
+<body>
+	<div class="container">
+		<div class="head">
+			<h1>Welcome to <a href="https://dlex.io/frontal" target="_blank">Frontal.JS</a></h1>
+			<p>A modern HTML development framework packed with the most critical commonly used features in today's modern workflows.</p>
+		</div>
+
+		<div class="cards">
+			<div class="card">
+				<pre>from the assets dir: @assets/svgs/google-icon.svg</pre>
+				<i-svg src="@assets/svgs/google-icon.svg" width="32"></i-svg>
+			</div>
+			<div class="card">
+				<pre>from npm package: @fortawesome/fontawesome-free/svgs/solid/adjust.svg</pre>
+				<i-svg src="@fortawesome/fontawesome-free/svgs/solid/adjust.svg" width="32"></i-svg>
+			</div>
+			<div class="card">
+				<pre>using shortcut per icons.config.js: fa/solid/user.svg</pre>
+				<i-svg src="fa/solid/user.svg" width="32"></i-svg>
+			</div>
+			<div class="card">
+				<pre>using sets from `svgs` dir: `&lt;i-svg set="set-1" icon="eg" ...`</pre>
+				<i-svg set="set-1" name="eg" width="32"></i-svg>
+				<i-svg set="set-1" name="us" width="32"></i-svg>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

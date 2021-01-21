@@ -1,0 +1,79 @@
+::placeholder {
+	color: red;
+}
+
+* {
+	margin: 20px;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+}
+body {
+	font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+}
+
+.container {
+	width: 780px;
+	margin: 0 auto;
+}
+
+.head {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.head h1 {
+	font-weight: 400;
+	font-size: 50px;
+	margin: 20px 0 10px 0;
+
+> a {
+	text-decoration: none;
+	color: rgb(2,132,199);
+	}
+
+> a:hover {
+	text-decoration: underline;
+	}
+}
+
+.head p {
+	font-weight: 500;
+	line-height: 22px;
+}
+
+.cards {
+	display: grid;
+	gap: 7px;
+	grid-template-columns: repeat(2, minmax(0,1fr));
+	margin-top: 30px;
+
+	> .card {
+		border: 1px solid #eaeaea;
+		border-radius: 5px;
+		padding: 15px;
+		color: #333;
+		font-size: 15px;
+		font-weight: 500;
+	}
+}
+
+.buttons {
+	display: flex;
+	margin-top: 20px;
+	justify-content: center;
+
+	> a {
+		font-size: 16px;
+		text-decoration: none;
+		color: #FFF;
+		background: #333;
+		padding: 10px;
+		border-radius: 5px;
+		margin-right: 5px;
+	}
+	> a.outline {
+		background: none;
+		color: #333;
+		border: 1px solid #333;
+	}
+}
