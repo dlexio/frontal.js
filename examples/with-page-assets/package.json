@@ -1,0 +1,11 @@
+{
+  "name": "with-page-assets",
+  "scripts": {
+    "dev": "frontal dev",
+    "build": "frontal build",
+    "serve": "frontal serve"
+  },
+  "devDependencies": {
+    "frontal.js": "latest"
+  }
+}
