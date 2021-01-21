@@ -12,7 +12,7 @@
   </a>
 </p>
 
-## Overview
+## Features
 
 A modern HTML development framework packed with the most critical and commonly used features in today's modern workflows:
 
@@ -27,6 +27,10 @@ A modern HTML development framework packed with the most critical and commonly u
 - Automatic Asset Optimization
 - Read the full list of features at [https://dlex.io/frontal](https://dlex.io/frontal).
 
+## Documentation
+
+View the full documentation at [https://dlex.io/frontal/docs](https://dlex.io/frontal/docs).
+
 ## Getting Started
 
 ```
@@ -35,9 +39,24 @@ $ frontal init my-project
 $ cd my-project && frontal dev
 ```
 
-## Documentation
+[Watch a 1-minute quick start video](https://www.youtube.com/watch?v=7Kp1tjCgw_o)
 
-View the full documentation at [https://dlex.io/frontal/docs](https://dlex.io/frontal/docs).
+## Examples
+
+- [Minimal (zero-config)](https://github.com/dlexio/frontal.js/tree/main/examples/minimal)
+- [Basic (basic-config)](https://github.com/dlexio/frontal.js/tree/main/examples/basic)
+- [Custom Bundles](https://github.com/dlexio/frontal.js/tree/main/examples/with-custom-bundles)
+- [Page Assets](https://github.com/dlexio/frontal.js/tree/main/examples/with-page-assets)
+- [Page Partials](https://github.com/dlexio/frontal.js/tree/main/examples/with-page-partials)
+- [Page SVGs](https://github.com/dlexio/frontal.js/tree/main/examples/with-page-svgs)
+- [With Tailwind](https://github.com/dlexio/frontal.js/tree/main/examples/with-tailwind)
+- [With Bootstrap](https://github.com/dlexio/frontal.js/tree/main/examples/with-bootstrap)
+- [With Bulma](https://github.com/dlexio/frontal.js/tree/main/examples/with-bulma)
+- [With Custom Babel Configuration](https://github.com/dlexio/frontal.js/tree/main/examples/with-babel)
+- [With Custom PostCSS Configuration](https://github.com/dlexio/frontal.js/tree/main/examples/with-postcss)
+- [With TypeScript](https://github.com/dlexio/frontal.js/tree/main/examples/with-typescript)
+- [With Linting](https://github.com/dlexio/frontal.js/tree/main/examples/with-linting)
+- [With Frontal Library](https://github.com/dlexio/frontal.js/tree/main/examples/bootstrap-library)
 
 ## Contribution
 
