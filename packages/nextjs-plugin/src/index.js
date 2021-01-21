@@ -17,6 +17,27 @@ module.exports = class Nextjs extends fPlugin {
         ctx.app.restart()
       }
     })
+
+    // Detect babel config
+    const babelConfigFile = path.join(this.app.cwd(), this.app.context(), 'babel.config.json')
+    try {
+      // refresh cache
+      delete require.cache[babelConfigFile];
+
+      // import babel config
+      this.babelConfig = require(babelConfigFile);
+    } catch(e) {
+      // babel fallback configuration
+      this.babelConfig = {
+        presets: [
+          require.resolve('@babel/preset-env')
+        ],
+      }
+    }
+    // Watch babel config for changes
+    this.app.watcher.watch(babelConfigFile, (event) => {
+        ctx.app.restart()
+    });
   }
 
   webpack(config) {
@@ -34,9 +55,7 @@ module.exports = class Nextjs extends fPlugin {
         require.resolve('cache-loader'),
         {
           loader: require.resolve('babel-loader'),
-          options: {
-            presets: [require.resolve('@babel/preset-env')],
-          },
+          options: this.babelConfig,
         },
       ],
     })
