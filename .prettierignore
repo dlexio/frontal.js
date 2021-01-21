@@ -1,5 +1,6 @@
 node_modules
 lerna.json
+examples/**
 packages/hmr-plugin/src/hot
 packages/hmr-plugin/src/client
 **/node_modules

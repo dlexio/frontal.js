@@ -22,22 +22,20 @@ module.exports = class Nextjs extends fPlugin {
     const babelConfigFile = path.join(this.app.cwd(), this.app.context(), 'babel.config.json')
     try {
       // refresh cache
-      delete require.cache[babelConfigFile];
+      delete require.cache[babelConfigFile]
 
       // import babel config
-      this.babelConfig = require(babelConfigFile);
-    } catch(e) {
+      this.babelConfig = require(babelConfigFile)
+    } catch (e) {
       // babel fallback configuration
       this.babelConfig = {
-        presets: [
-          require.resolve('@babel/preset-env')
-        ],
+        presets: [require.resolve('@babel/preset-env')],
       }
     }
     // Watch babel config for changes
-    this.app.watcher.watch(babelConfigFile, (event) => {
-        ctx.app.restart()
-    });
+    this.app.watcher.watch(babelConfigFile, () => {
+      ctx.app.restart()
+    })
   }
 
   webpack(config) {
