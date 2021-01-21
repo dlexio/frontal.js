@@ -1,0 +1,8 @@
+@charset "utf-8";
+// @todo override bootstrap defaults...
+$grid-gutter-width: 10px;
+@import "~bootstrap/scss/bootstrap";
+
+body {
+	padding: 50px 0;
+}
