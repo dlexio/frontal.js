@@ -1,0 +1,15 @@
+{
+  "name": "with-custom-bundles",
+  "scripts": {
+    "dev": "frontal dev",
+    "build": "frontal build",
+    "serve": "frontal serve"
+  },
+  "devDependencies": {
+    "frontal.js": "latest"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.4",
+    "jquery": "^3.5.1"
+  }
+}

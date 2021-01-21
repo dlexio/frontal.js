@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Frontal.JS Application</title>
+</head>
+<body>
+	<div class="container">
+		<div class="head">
+			<h1>Welcome to <a href="https://dlex.io/frontal" target="_blank">Frontal.JS</a></h1>
+			<p>A modern HTML development framework packed with the most critical commonly used features in today's modern workflows.</p>
+		</div>
+	</div>
+	<script>
+		// jQuery and $ are available globally due to the use of the provideAs property in frontal.config.js
+		jQuery(function() {
+			$('.container').append('<p>This line is added via jQuery. Check the <a href="/stats.html">Stats</a></p>')
+		});
+	</script>
+</body>
+</html>
