@@ -1,6 +1,6 @@
-## Page Assets Example
+## Page Partials Example
 
-This example shows how to load assets/images within your HTML pages using aliases.
+This example shows how to use HTML partials to keep your pages neat and simple, check the `/pages` directory.
 
 ## Usage
 

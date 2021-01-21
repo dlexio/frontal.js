@@ -1,5 +1,5 @@
 {
-  "name": "with-page-assets",
+  "name": "with-page-partials",
   "scripts": {
     "dev": "frontal dev",
     "build": "frontal build",
