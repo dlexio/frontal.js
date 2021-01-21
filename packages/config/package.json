@@ -1,6 +1,6 @@
 {
   "name": "@frontal/config",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "Frontal's application's configuration parser",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "@frontal/hmr-plugin": "^0.1.11",
     "@frontal/library-plugin": "^0.1.13",
     "@frontal/lint-plugin": "^0.1.8",
-    "@frontal/nextjs-plugin": "^0.1.11",
+    "@frontal/nextjs-plugin": "^0.1.12",
     "@frontal/pages-plugin": "^0.1.14",
     "@frontal/style-plugin": "^0.1.11",
     "@frontal/svgs-plugin": "^0.1.2",
