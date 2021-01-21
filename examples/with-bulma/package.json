@@ -1,0 +1,14 @@
+{
+  "name": "with-bulma",
+  "scripts": {
+    "dev": "frontal dev",
+    "build": "frontal build",
+    "serve": "frontal serve"
+  },
+  "devDependencies": {
+    "frontal.js": "latest"
+  },
+  "dependencies": {
+    "bulma": "^0.9.1"
+  }
+}
