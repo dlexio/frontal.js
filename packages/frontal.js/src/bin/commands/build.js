@@ -19,7 +19,7 @@ module.exports = async (dir, cmd) => {
     cwd,
     context,
     devMode: false,
-    analyze: opts.analyze
+    analyze: opts.analyze,
   })
 
   // Start development server

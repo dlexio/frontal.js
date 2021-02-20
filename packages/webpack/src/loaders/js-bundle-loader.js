@@ -13,7 +13,7 @@ module.exports = function () {
 
   // Go through each file and construct the final output
   for (const file of options.files) {
-    let scopedWith = '';
+    let scopedWith = ''
     let modulePath = is.object(file) ? file.path : file
 
     // Apply the expose-loader if required to

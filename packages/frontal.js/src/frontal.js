@@ -20,7 +20,7 @@ module.exports = class Frontal {
         context: '.',
         cwd,
         devMode: false,
-        analyze: false
+        analyze: false,
       },
       options
     )
@@ -180,7 +180,7 @@ module.exports = class Frontal {
       host: this.config.get('server.host'),
       port: this.config.get('server.port'),
       contentBase: path.join(this.cwd(), this.config.get('directories.build')),
-      base: this.config.get('server.base')
+      base: this.config.get('server.base'),
     })
 
     this._startServer(server)

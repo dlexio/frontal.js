@@ -35,9 +35,9 @@ module.exports = function (source) {
       delimiters: ['[[', ']]'],
       unescapeDelimiters: ['[[[', ']]]'],
       locals: {
-        server: app.config.get('server')
-      }
-    })
+        server: app.config.get('server'),
+      },
+    }),
   ]
 
   posthtml(posthtmlPlugins)

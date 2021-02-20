@@ -11,12 +11,12 @@ const svgoConfig = (svgsConfig) => ({
       removeDimensions: svgsConfig.optimize.stripDimensions,
     },
     {
-      convertColors:  {
+      convertColors: {
         currentColor: svgsConfig.currentColor,
         names2hex: true,
         rgb2hex: true,
         shorthex: true,
-        shortname: true
+        shortname: true,
       },
     },
     {
@@ -34,7 +34,7 @@ const svgoConfig = (svgsConfig) => ({
     //   }
     // }
   ],
-});
+})
 
 const replaceFromMap = (map, str) => {
   // Ignore if replacement is not an object
@@ -141,7 +141,7 @@ const handleSvg = (app, loaderCtx, $, elem, svgsConfig, svgo) => {
 
           // Optimize SVG
           svgo
-            .optimize(data.toString(), {path: resolvedSvg})
+            .optimize(data.toString(), { path: resolvedSvg })
             .then((res) => {
               const $svg = cheerio.load(res.data)
 
@@ -210,7 +210,7 @@ module.exports = class SvgsPlugin extends fPlugin {
       // Apply default optimize options if not available
       if (is.undefined(svgsConfig.optimize)) {
         svgsConfig.optimize = {
-          stripDimensions: true
+          stripDimensions: true,
         }
       }
 

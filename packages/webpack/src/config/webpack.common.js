@@ -3,18 +3,18 @@ const path = require('path')
 const WebpackBar = require('webpackbar')
 const frontalBundlesPlugin = require('../plugins/bundles-plugin')
 const TimeFixPlugin = require('time-fix-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (frontalApp) => {
   const plugins = [
     new webpack.IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
-      contextRegExp: /moment$/
+      contextRegExp: /moment$/,
     }),
     new WebpackBar({ name: frontalApp.name() }),
     new TimeFixPlugin(),
-    new frontalBundlesPlugin(frontalApp)
-  ];
+    new frontalBundlesPlugin(frontalApp),
+  ]
 
   // Add bundle analyzer
   if (frontalApp.analyze()) {

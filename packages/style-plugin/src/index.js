@@ -85,9 +85,7 @@ module.exports = class StylePlugin extends fPlugin {
     })
 
     // Add support for scss
-    const postcssPlugins = [
-      require('autoprefixer')
-    ]
+    const postcssPlugins = [require('autoprefixer')]
     // enable purging if in production mode and purgecss is enabled
     if (!this.app.inDevMode() && this.app.config.get('build.purgecss.enabled', false)) {
       postcssPlugins.push(purgeCSS(this.app))

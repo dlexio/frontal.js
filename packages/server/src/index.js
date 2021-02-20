@@ -35,7 +35,7 @@ module.exports = class Server {
         host: undefined,
         port: 0,
         contentBase: '/',
-        base: '/'
+        base: '/',
       },
       config
     )
