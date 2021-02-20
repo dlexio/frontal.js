@@ -1,6 +1,6 @@
 {
   "name": "@frontal/server",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Production and Development express server for Frontal.JS",
   "homepage": "https://github.com/dlexio/frontal.js#readme",
   "license": "MIT",
