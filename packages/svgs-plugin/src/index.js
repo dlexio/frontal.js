@@ -5,6 +5,36 @@ const fPlugin = require('@frontal/plugin')
 const { urlToRequest } = require('loader-utils')
 const cheerio = require('cheerio')
 const SVGo = require('svgo')
+const svgoConfig = (svgsConfig) => ({
+  plugins: [
+    {
+      removeDimensions: svgsConfig.optimize.stripDimensions,
+    },
+    {
+      convertColors:  {
+        currentColor: svgsConfig.currentColor,
+        names2hex: true,
+        rgb2hex: true,
+        shorthex: true,
+        shortname: true
+      },
+    },
+    {
+      prefixIds: true,
+    },
+    // {
+    //   cleanupIDs: {
+    //     prefix: {
+    //       toString() {
+    //         this.counter = this.counter || 0;
+    //
+    //         return `id-${this.counter++}`;
+    //       }
+    //     }
+    //   }
+    // }
+  ],
+});
 
 const replaceFromMap = (map, str) => {
   // Ignore if replacement is not an object
@@ -89,26 +119,47 @@ const handleSvg = (app, loaderCtx, $, elem, svgsConfig, svgo) => {
           return
         }
 
-        // Optimize SVG
-        svgo
-          .optimize(data.toString())
-          .then((res) => {
-            const $svg = cheerio.load(res.data)
+        // Ignore SVGO if indicated
+        if (attrs['data-load-only']) {
+          const $svg = cheerio.load(data.toString())
 
-            // Apply all attributes to the SVG
-            Object.keys(attrs)
-              .filter((attrKey) => ['src', 'set', 'name'].indexOf(attrKey) === -1)
-              .forEach((attrKey) => {
-                const attrVal = attrs[attrKey]
-                $svg('svg').attr(attrKey, attrVal)
-              })
+          // Apply all attributes to the SVG
+          Object.keys(attrs)
+            .filter((attrKey) => ['src', 'set', 'name', 'data-current-color'].indexOf(attrKey) === -1)
+            .forEach((attrKey) => {
+              const attrVal = attrs[attrKey]
+              $svg('svg').attr(attrKey, attrVal)
+            })
 
-            $(elem).replaceWith(constructSvg(attrs, $svg.html(), res.info))
-            resolve()
-          })
-          .catch((e) => {
-            reject(e)
-          })
+          $(elem).replaceWith(constructSvg(attrs, $svg.html(), {}))
+          resolve()
+        } else {
+          // Enable convertColor if indicated by an attr
+          if (attrs['data-current-color'] !== undefined) {
+            svgo = new SVGo(svgoConfig({ ...svgsConfig, currentColor: true }))
+          }
+
+          // Optimize SVG
+          svgo
+            .optimize(data.toString(), {path: resolvedSvg})
+            .then((res) => {
+              const $svg = cheerio.load(res.data)
+
+              // Apply all attributes to the SVG
+              Object.keys(attrs)
+                .filter((attrKey) => ['src', 'set', 'name', 'data-current-color'].indexOf(attrKey) === -1)
+                .forEach((attrKey) => {
+                  const attrVal = attrs[attrKey]
+                  $svg('svg').attr(attrKey, attrVal)
+                })
+
+              $(elem).replaceWith(constructSvg(attrs, $svg.html(), res.info))
+              resolve()
+            })
+            .catch((e) => {
+              reject(e)
+            })
+        }
       })
     })
   })
@@ -159,14 +210,12 @@ module.exports = class SvgsPlugin extends fPlugin {
       // Apply default optimize options if not available
       if (is.undefined(svgsConfig.optimize)) {
         svgsConfig.optimize = {
-          stripDimensions: true,
+          stripDimensions: true
         }
       }
 
       // Initiate a new SVGo instance with plugins based on options
-      const svgo = new SVGo({
-        plugins: [{ removeDimensions: svgsConfig.optimize.stripDimensions }],
-      })
+      const svgo = new SVGo(svgoConfig(svgsConfig))
 
       // Create promises for svgs
       const promises = []

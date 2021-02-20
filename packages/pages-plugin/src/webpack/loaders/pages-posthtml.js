@@ -2,6 +2,7 @@ const path = require('path')
 const { getOptions } = require('loader-utils')
 const posthtml = require('posthtml')
 const modules = require('posthtml-modules')
+const expressions = require('posthtml-expressions')
 
 /**
  * Posthtml integration loader for the partials feature
@@ -30,6 +31,13 @@ module.exports = function (source) {
       ),
       from: '/',
     }),
+    expressions({
+      delimiters: ['[[', ']]'],
+      unescapeDelimiters: ['[[[', ']]]'],
+      locals: {
+        server: app.config.get('server')
+      }
+    })
   ]
 
   posthtml(posthtmlPlugins)

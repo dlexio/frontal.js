@@ -2,6 +2,7 @@ const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (frontalApp) => {
   return {
@@ -16,7 +17,7 @@ module.exports = (frontalApp) => {
     },
     optimization: {
       minimize: true,
-      minimizer: [new CssMinimizerPlugin()],
+      minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
     },
     plugins: [
       new CleanWebpackPlugin(),

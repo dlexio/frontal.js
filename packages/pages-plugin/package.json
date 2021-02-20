@@ -28,6 +28,7 @@
     "lodash": "^4.17.20",
     "picomatch": "^2.2.2",
     "posthtml": "^0.13.4",
+    "posthtml-expressions": "^1.7.1",
     "posthtml-modules": "^0.6.2",
     "srcset": "^3.0.0",
     "url-loader": "^4.1.1",

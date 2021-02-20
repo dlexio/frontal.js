@@ -35,6 +35,7 @@ module.exports = class Server {
         host: undefined,
         port: 0,
         contentBase: '/',
+        base: '/'
       },
       config
     )
@@ -55,7 +56,7 @@ module.exports = class Server {
     this.app = express()
 
     // Serve static files
-    this.app.use(express.static(this.options.contentBase))
+    this.app.use(this.options.base, express.static(this.options.contentBase))
   }
 
   /**

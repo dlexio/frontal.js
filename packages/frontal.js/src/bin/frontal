@@ -28,6 +28,7 @@ program.command('dev [dir]')
     .option('-o, --open', 'Open server address in web browser', false)
     .option('-h, --host <host>', 'development server host', undefined)
     .option('-p, --port <port>', 'development server port', 3000)
+    .option('-A, --analyze', 'enable bundle analyzer', false)
     .action(dev);
 
 /**
@@ -39,6 +40,7 @@ program.command('dev [dir]')
 program.command('build [dir]')
     .description('Start building a production version of <app>')
     .option('-c, --config <config-path>', 'custom frontal.config.js location', 'frontal.config.js')
+    .option('-A, --analyze', 'enable bundle analyzer', false)
     .action(build);
 
 /**

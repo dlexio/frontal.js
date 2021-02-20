@@ -25,6 +25,7 @@ module.exports = (dir, cmd) => {
     cwd,
     context,
     devMode: true,
+    analyze: opts.analyze
   })
 
   // setInterval(() => {

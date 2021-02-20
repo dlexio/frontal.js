@@ -19,6 +19,7 @@ module.exports = async (dir, cmd) => {
     cwd,
     context,
     devMode: false,
+    analyze: opts.analyze
   })
 
   // Start development server
@@ -28,5 +29,7 @@ module.exports = async (dir, cmd) => {
     app.logger.error('build failed: %s', err)
   }
 
-  process.exit(0)
+  if (!opts.analyze) {
+    process.exit(0)
+  }
 }
