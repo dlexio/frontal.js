@@ -31,7 +31,7 @@
     "sass": "^1.27.0",
     "sass-loader": "^10.0.3",
     "style-loader": "^2.0.0",
-    "webpack": "^5.10.0"
+    "webpack": "^5.24.3"
   },
   "gitHead": "a4e9277c6a91d9e0e467f97aeae8cfb588ec770a"
 }

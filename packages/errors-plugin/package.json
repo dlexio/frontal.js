@@ -18,7 +18,7 @@
   "dependencies": {
     "@frontal/plugin": "^0.1.6",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "webpack": "^5.10.0"
+    "webpack": "^5.24.3"
   },
   "gitHead": "a4e9277c6a91d9e0e467f97aeae8cfb588ec770a"
 }
