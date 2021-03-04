@@ -1,6 +1,6 @@
 {
   "name": "@frontal/svgs-plugin",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Replace <i-svg> tag within HTML templates with inline SVGs",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
