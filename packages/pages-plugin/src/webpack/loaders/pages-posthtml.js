@@ -29,7 +29,7 @@ module.exports = function (source) {
         app.config.get('pages.partials', '.partials'),
         '/'
       ),
-      from: '/'
+      from: '/',
     }),
   ]
 

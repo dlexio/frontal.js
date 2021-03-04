@@ -104,7 +104,7 @@ module.exports = class PagesPlugin extends fPlugin {
             pagesDir: this.pagesDir,
             partialsDir: this.partialsDir,
           },
-        }
+        },
       ],
     })
 

@@ -1,5 +1,5 @@
 const { getOptions } = require('loader-utils')
-const template = require('lodash.template');
+const template = require('lodash.template')
 
 /**
  * Pages lodash templates parser
@@ -13,12 +13,12 @@ module.exports = function (source) {
     options = getOptions(ctx)
   const app = options.app
 
-  const compiled = template(source);
+  const compiled = template(source)
   try {
     const newSrc = compiled({
       server: app.config.get('server'),
-    });
-    callback(null, newSrc);
+    })
+    callback(null, newSrc)
   } catch (e) {
     callback(e)
   }
