@@ -2,7 +2,6 @@ const path = require('path')
 const { getOptions } = require('loader-utils')
 const posthtml = require('posthtml')
 const modules = require('posthtml-modules')
-const expressions = require('posthtml-expressions')
 
 /**
  * Posthtml integration loader for the partials feature
@@ -12,6 +11,7 @@ const expressions = require('posthtml-expressions')
  */
 module.exports = function (source) {
   this.cacheable(false)
+
   const ctx = this,
     callback = ctx.async(),
     options = getOptions(ctx)
@@ -29,14 +29,7 @@ module.exports = function (source) {
         app.config.get('pages.partials', '.partials'),
         '/'
       ),
-      from: '/',
-    }),
-    expressions({
-      delimiters: ['[[', ']]'],
-      unescapeDelimiters: ['[[[', ']]]'],
-      locals: {
-        server: app.config.get('server'),
-      },
+      from: '/'
     }),
   ]
 
@@ -46,7 +39,6 @@ module.exports = function (source) {
       callback(null, result.html)
     })
     .catch((e) => {
-      // console.error('err', e);
       callback(e)
     })
 }

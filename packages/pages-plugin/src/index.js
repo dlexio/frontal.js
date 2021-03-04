@@ -90,13 +90,21 @@ module.exports = class PagesPlugin extends fPlugin {
           },
         },
         {
-          loader: path.resolve(__dirname, './webpack/loaders/pages-posthtml.js'),
+          loader: path.resolve(__dirname, './webpack/loaders/pages-lo-templates.js'),
           options: {
             app: this.app,
             pagesDir: this.pagesDir,
             partialsDir: this.partialsDir,
           },
         },
+        {
+          loader: path.resolve(__dirname, './webpack/loaders/pages-posthtml.js'),
+          options: {
+            app: this.app,
+            pagesDir: this.pagesDir,
+            partialsDir: this.partialsDir,
+          },
+        }
       ],
     })
 
