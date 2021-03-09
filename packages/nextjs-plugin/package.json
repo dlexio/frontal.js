@@ -1,6 +1,6 @@
 {
   "name": "@frontal/nextjs-plugin",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "license": "MIT",
   "main": "src/index.js",
   "files": [
