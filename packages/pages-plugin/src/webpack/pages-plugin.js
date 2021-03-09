@@ -74,6 +74,8 @@ module.exports = class PagesWebpackPlugin {
         // Get pages
         const pagesGlob = path.join(this.dir, '**', `*.*(${this.opts.extensions.join('|')})`)
         const pages = glob.sync(pagesGlob).map((page) => {
+          // glob replaces dir separator to posix, we need to change that to the current sep of the system
+          page = page.split(path.posix.sep).join(path.sep)
           const pageName = page.replace(`${this.dir + path.sep}`, '')
           return {
             path: page,
@@ -228,13 +230,11 @@ module.exports = class PagesWebpackPlugin {
         traversePages().then((pages) => {
           pages.forEach((page) => {
             const pageAssetMatch = pm(
-              `${
-                this.app.config.get('build.assets.into') +
-                path.sep +
-                this.app.config.get('build.js.into') +
-                path.sep +
-                page.name
-              }.*.js`
+              path.join(
+                this.app.config.get('build.assets.into'),
+                this.app.config.get('build.js.into'),
+                `${page.name}.*.js`
+              ).split(path.sep).join(path.posix.sep)
             )
 
             Object.keys(assets).forEach((assetName) => {

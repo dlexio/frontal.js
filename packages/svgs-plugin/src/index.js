@@ -66,7 +66,7 @@ const handleSvg = (app, loaderCtx, $, elem, svgsConfig, svgo) => {
   const computeSrc = is.function(svgsConfig.computeSrc)
     ? svgsConfig.computeSrc
     : (svgsPath, attrs) => {
-        return path.join('~', svgsPath, attrs.set, attrs.name)
+        return `~/${svgsPath}/${attrs.set}/${attrs.name}`
       }
   const constructSvg = is.function(svgsConfig.construct)
     ? svgsConfig.construct

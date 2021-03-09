@@ -19,7 +19,7 @@ module.exports = class Nextjs extends fPlugin {
     })
 
     // Detect babel config
-    const babelConfigFile = path.join(this.app.cwd(), this.app.context(), 'babel.config.json')
+    const babelConfigFile = path.join(this.app.cwd(), this.app.context(), 'babel.config.js')
     try {
       // refresh cache
       delete require.cache[babelConfigFile]
