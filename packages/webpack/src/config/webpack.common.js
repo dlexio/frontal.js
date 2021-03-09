@@ -24,7 +24,7 @@ module.exports = (frontalApp) => {
   return {
     context: path.resolve(frontalApp.cwd(), frontalApp.context()),
     stats: false,
-    target: 'web',
+    target: ['web', 'es5'],
     entry: {},
     output: {
       publicPath: frontalApp.config.get('server.base'),

@@ -16,7 +16,7 @@ module.exports = (frontalApp) => {
       },
     },
     optimization: {
-      minimize: true,
+      minimize: false,
       minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
     },
     plugins: [

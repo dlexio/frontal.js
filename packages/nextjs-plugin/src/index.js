@@ -29,7 +29,9 @@ module.exports = class Nextjs extends fPlugin {
     } catch (e) {
       // babel fallback configuration
       this.babelConfig = {
-        presets: [require.resolve('@babel/preset-env')],
+        presets: [
+          ['@babel/preset-env', { targets: "defaults" }]
+        ]
       }
     }
     // Watch babel config for changes
