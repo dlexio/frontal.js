@@ -20,6 +20,7 @@
     "@frontal/plugin": "^0.1.6",
     "babel-loader": "^8.2.1",
     "cache-loader": "^4.1.0",
+    "core-js": "3",
     "fork-ts-checker-webpack-plugin": "^6.0.1",
     "ts-loader": "^8.0.11",
     "typescript": "^4.0.5"

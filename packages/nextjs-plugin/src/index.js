@@ -29,7 +29,17 @@ module.exports = class Nextjs extends fPlugin {
     } catch (e) {
       // babel fallback configuration
       this.babelConfig = {
-        presets: [['@babel/preset-env', { targets: 'defaults' }]],
+        //sourceType: "unambiguous",
+        presets: [
+          [
+            require.resolve('@babel/preset-env'),
+            {
+              targets: 'defaults',
+              //corejs: '3',
+              //useBuiltIns: 'usage'
+            }
+          ]
+        ]
       }
     }
     // Watch babel config for changes
@@ -42,15 +52,20 @@ module.exports = class Nextjs extends fPlugin {
     config.merge({
       resolve: {
         extensions: ['.ts', '.tsx', '.js'],
+        // modules: [require.resolve('./node_modules')],
       },
     })
 
     // Add support for Babel
     config.addModuleRule({
       test: /\.m?js$/,
-      exclude: /(node_modules|bower_components|\.file.js)/,
+      include: [
+        path.join(this.app.cwd(), this.app.context()),
+      ],
+      exclude: /(core-js)/,
+      //exclude: /(node_modules|bower_components|\.file.js)/,
       use: [
-        require.resolve('cache-loader'),
+        //require.resolve('cache-loader'),
         {
           loader: require.resolve('babel-loader'),
           options: this.babelConfig,
