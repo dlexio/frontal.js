@@ -1,1 +1,1 @@
-packages/frontal.js/README.md
+./packages/frontal.js/README.md
