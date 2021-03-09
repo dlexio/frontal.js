@@ -37,9 +37,9 @@ module.exports = class Nextjs extends fPlugin {
               targets: 'defaults',
               //corejs: '3',
               //useBuiltIns: 'usage'
-            }
-          ]
-        ]
+            },
+          ],
+        ],
       }
     }
     // Watch babel config for changes
@@ -59,9 +59,7 @@ module.exports = class Nextjs extends fPlugin {
     // Add support for Babel
     config.addModuleRule({
       test: /\.m?js$/,
-      include: [
-        path.join(this.app.cwd(), this.app.context()),
-      ],
+      include: [path.join(this.app.cwd(), this.app.context())],
       exclude: /(core-js)/,
       //exclude: /(node_modules|bower_components|\.file.js)/,
       use: [
