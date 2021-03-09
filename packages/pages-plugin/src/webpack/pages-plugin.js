@@ -230,11 +230,14 @@ module.exports = class PagesWebpackPlugin {
         traversePages().then((pages) => {
           pages.forEach((page) => {
             const pageAssetMatch = pm(
-              path.join(
-                this.app.config.get('build.assets.into'),
-                this.app.config.get('build.js.into'),
-                `${page.name}.*.js`
-              ).split(path.sep).join(path.posix.sep)
+              path
+                .join(
+                  this.app.config.get('build.assets.into'),
+                  this.app.config.get('build.js.into'),
+                  `${page.name}.*.js`
+                )
+                .split(path.sep)
+                .join(path.posix.sep)
             )
 
             Object.keys(assets).forEach((assetName) => {
