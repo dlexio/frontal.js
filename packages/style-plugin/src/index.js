@@ -96,6 +96,7 @@ module.exports = class StylePlugin extends fPlugin {
       {
         loader: require.resolve('postcss-loader'),
         options: {
+          implementation: require(require.resolve('postcss')),
           postcssOptions: {
             config: true,
             plugins: postcssPlugins,
