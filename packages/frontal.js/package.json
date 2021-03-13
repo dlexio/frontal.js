@@ -1,6 +1,6 @@
 {
   "name": "frontal.js",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "description": "HTTP Development Framework",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
@@ -18,7 +18,7 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@frontal/config": "^0.1.23",
+    "@frontal/config": "^0.1.24",
     "@frontal/plugin": "^0.1.6",
     "@frontal/server": "^0.1.6",
     "@frontal/webpack": "^0.1.15",

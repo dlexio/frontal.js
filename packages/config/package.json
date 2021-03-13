@@ -1,6 +1,6 @@
 {
   "name": "@frontal/config",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "description": "Frontal's application's configuration parser",
   "homepage": "https://github.com/dlexio/frontal.js",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "@frontal/lint-plugin": "^0.1.8",
     "@frontal/nextjs-plugin": "^0.1.13",
     "@frontal/pages-plugin": "^0.1.17",
-    "@frontal/style-plugin": "^0.1.13",
+    "@frontal/style-plugin": "^0.1.14",
     "@frontal/svgs-plugin": "^0.1.5",
     "chokidar": "^3.4.3",
     "consola": "^2.15.0",
